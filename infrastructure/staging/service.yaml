@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: oe-frontend
+  namespace: genetics
+  labels:
+    app: oe-angular
+    tier: frontend
+spec:
+  selector:
+    app: oe-angular
+    tier: frontend
+  ports:
+    - name: web
+      port: 80
+      targetPort: 80
+      protocol: TCP
