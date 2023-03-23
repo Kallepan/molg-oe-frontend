@@ -1,0 +1,43 @@
+.top-spacer {
+    margin-top: 20px;
+}
+
+.login-form-container mat-form-field + mat-form-field {
+    margin-left: 8px;
+}
+
+.login-form-container mat-form-field + button {
+    margin-left: 8px;
+}
+
+.login-form-container mat-form-field {
+    width: 160px;
+    height: 70px;
+}
+
+.dynamic-form {
+    transition: all .5s;
+}
+
+.spacer {
+    margin-left: 10px;
+}
+
+.small-login-button {
+    float:right;
+    display: inline;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+}
+
+.logged-in-container {
+    float: right;
+
+}
+.logged-in-container button {
+
+    margin-top: 5px;
+    float: right;
+    
+}
