@@ -11,6 +11,7 @@ import { AuthDialogComponent } from './login/auth-dialog/auth-dialog.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { ErrorCatchingInterceptor, GlobalInterceptor } from './app-interceptor.module';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ErrorCatchingInterceptor, GlobalInterceptor } from './app-interceptor.m
     LoginComponent,
     AuthDialogComponent,
     HomeComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

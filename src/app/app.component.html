@@ -9,16 +9,7 @@
       [disabled]="navLink.disabled">{{navLink.displayName}}<br><small>{{navLink.type}}</small></a>
   </div>
   <span class="small-spacer"></span>
-  <div>
-    <button mat-button [matMenuTriggerFor]="secondaryNavMenu" href="#" class="header-link">Hilfe</button>
-    <mat-menu #secondaryNavMenu>
-      <ng-template matMenuContent>
-        <button mat-menu-item *ngFor="let navLink of secondaryNavLinks" [routerLink]="navLink.routerLink"
-          routerLinkActive="is-active" [disabled]="navLink.disabled">{{navLink.displayName}}</button>
-        <button mat-menu-item href="/admin" target="_blank">Admin</button>
-      </ng-template>
-    </mat-menu>
-  </div>
+
   <span class="wide-spacer"></span>
   <app-login></app-login>
 </mat-toolbar>

@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   version = CONSTANTS.VERSION;
   year = new Date().getFullYear();
 
-  primaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => navLink.primary);
+  primaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => navLink.primary).reverse();
   secondaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => !navLink.primary)
 
   constructor(private authService: AuthService) {  }

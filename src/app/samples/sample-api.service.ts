@@ -81,4 +81,23 @@ export class SampleAPIService {
 
     return this.http.get(SAMPLES_API_ENDPOINT, httpOptions);
   }
+
+  getLatestSamples(no_of_items: number): Observable<HttpResponse<any>> {
+    const query_params = {
+      limit: no_of_items,
+      ordering: "-created_at"
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      observe: 'response' as const,
+      params: new HttpParams({
+        fromObject: query_params,
+      })
+    };
+
+    return this.http.get(SAMPLES_API_ENDPOINT, httpOptions);
+  }
 }

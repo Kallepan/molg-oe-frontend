@@ -106,3 +106,19 @@ $frontend-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100vh;}
+
+
+.container {
+  max-width: 1400px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.warn-snackbar {
+  --mdc-snackbar-container-color: #812121;
+  color:white;
+}
+
+.success-snackbar {
+  color: white;
+}
