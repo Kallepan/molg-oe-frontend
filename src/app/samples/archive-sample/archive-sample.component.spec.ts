@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppModule } from 'src/app/app.module';
+import { SamplesModule } from '../samples.module';
 
 import { ArchiveSampleComponent } from './archive-sample.component';
 
@@ -8,6 +10,7 @@ describe('ArchiveSampleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [AppModule, SamplesModule],
       declarations: [ ArchiveSampleComponent ]
     })
     .compileComponents();

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from 'src/app/app.module';
+import { MaterialModule } from 'src/app/material/material.module';
 
 import { AuthDialogComponent } from './auth-dialog.component';
 
@@ -9,7 +10,7 @@ describe('AuthDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, MaterialModule],
       declarations: [ AuthDialogComponent ]
     })
     .compileComponents();

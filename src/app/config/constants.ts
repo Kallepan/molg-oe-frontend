@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from "@angular/animations";
 import { environment } from "../environments/environment";
 
 export interface CustomError {
@@ -34,8 +35,25 @@ export class CONSTANTS {
 
     public static NAV_LINKS: navLink[] = [
         { routerLink: '/hilfe',  disabled: false, displayName: "Hilfe", type: 'Information', primary: true, description: "Erklaerung der Webseite."},
-        { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Lagerung', primary: true, description: 'Proben archivieren.'},
         { routerLink: '/proben/search', disabled: false, displayName: 'Suche', type: 'Probensuche', primary: true, description: 'Proben aus dem Archiv raussuchen.'},
+        { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Lagerung', primary: true, description: 'Proben archivieren.'},
         { routerLink: '/proben', disabled: false, displayName: 'Proben', type: 'Eingang', primary: true, description: "Vergabe von Gennummer." },
     ]
+}
+
+export class ANIMATIONS {
+    public static inOutAnimation = [
+        trigger(
+            'inOutAnimation', [
+            transition(':enter', [
+                style({ opacity: 0, height: 'fit-content' }),
+                animate('1s ease-out', style({ opacity: 1, height: 'auto', translateX: 10 })),
+            ]),
+            transition(':leave', [
+                style({ opacity: 1, height: 'auto' }),
+                animate('1s ease-in', style({ opacity: 0, height: 'fit-content' })),
+            ]),
+        ],
+        )
+    ];
 }

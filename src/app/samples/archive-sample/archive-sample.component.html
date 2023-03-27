@@ -1,1 +1,28 @@
-<p>archive-sample works!</p>
+<div class="container">
+    <h1>Probe im Archiv einlagern</h1>
+    <form [formGroup]="sampleFormGroup" class="sample-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Tagesnummer</mat-label>
+            <input matInput placeholder="491111111102" (keydown.Tab)="submit($event)" (keyup.enter)="submit($event)"
+                formControlName="tagesnummer" type="text" maxlength="13" minlength="10">
+            <mat-hint align="start">Tagesnummer eingeben und mit Enter/Tab bestätigen</mat-hint>
+        </mat-form-field>
+    </form>
+
+    <div *ngIf="(samples$ | async) as samples" class="samples-container">
+        <mat-card *ngFor="let sample of samples" class="new-sample sample mat-elevation-z8">
+            <mat-card-header>
+                <mat-card-title><strong>{{sample.tagesnummer}}</strong></mat-card-title>
+                <mat-card-subtitle>{{sample.internal_number}} in {{sample.full_rack_position}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Erstellt am {{sample.created_at}} von {{sample.created_by|titlecase}}</p>
+                <p>Archiviert am {{sample.archived_at}} von {{sample.archived_by|titlecase}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <br />
+    <br />
+    <br />
+</div>

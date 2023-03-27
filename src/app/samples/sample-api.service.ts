@@ -12,9 +12,9 @@ export class SampleAPIService {
 
   constructor(private http: HttpClient) { }
 
-  assignRackPosition(tagesnummer: string, assign_rack: boolean): Observable<HttpResponse<any>> {
+  assignRackPosition(tagesnummer: string): Observable<HttpResponse<any>> {
     const data = {
-      assign_rack: assign_rack,
+      assign_rack: true,
     };
 
     const httpOptions = {
@@ -24,7 +24,7 @@ export class SampleAPIService {
       observe: 'response' as const
     };
 
-    return this.http.patch(SAMPLES_API_ENDPOINT, data, httpOptions);
+    return this.http.patch(`${SAMPLES_API_ENDPOINT}${tagesnummer}/`, data, httpOptions);
   }
 
 
@@ -67,6 +67,26 @@ export class SampleAPIService {
       month: parseInt(month),
       sample_no: parseInt(sample_no),
       year: parseInt(year),
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      observe: 'response' as const,
+      params: new HttpParams({
+        fromObject: query_params,
+      })
+    };
+
+    return this.http.get(SAMPLES_API_ENDPOINT, httpOptions);
+  }
+
+  getLatestSamplesByArchive(no_of_items: number): Observable<HttpResponse<any>> {
+    const query_params = {
+      limit: no_of_items,
+      ordering: "-archived_at",
+      archived_at__isnull: 'False',
     };
 
     const httpOptions = {

@@ -12,4 +12,6 @@ export class ERRORS {
     public static ERROR_NOT_SAVED_TO_DB = "Die Änderungen werden nicht gespeichert";
 
     public static ERROR_UPDATE = "Das Sample konnte nicht gespeichert werden.";
+
+    public static ERROR_NO_SAMPLE = "Es wurde keine Probe zur Tagesnummer/Gennummer gefunden.";
 }

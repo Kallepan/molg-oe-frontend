@@ -1,1 +1,29 @@
-<p>search-sample works!</p>
+<div class="container">
+    <h1>Probe aus dem Archiv raussuchen</h1>
+    <form [formGroup]="sampleFormGroup" class="sample-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Tagesnummer</mat-label>
+            <input matInput placeholder="491111111102" (keydown.Tab)="submitTagesnummer($event)" (keyup.enter)="submitTagesnummer($event)"
+                formControlName="tagesnummer" type="text" maxlength="13" minlength="10">
+            <mat-hint align="start">Tagesnummer eingeben und mit Enter/Tab bestätigen</mat-hint>
+        </mat-form-field>
+        <div class="spacer">oder...</div>
+        <mat-form-field appearance="outline">
+            <mat-label>Gennummer</mat-label>
+            <input matInput placeholder="(003)7-03-2023" (keydown.Tab)="submitInternalNumber($event)" (keyup.enter)="submitInternalNumber($event)" formControlName="internalNumber">
+            <mat-hint align="start">Interne Nummer eingeben und mit Enter/Tab bestätigen</mat-hint>
+        </mat-form-field>
+    </form>
+
+    <div *ngIf="(samples$ | async) as samples" class="samples-container">
+        <mat-card class="mat-elevation-z8" *ngFor="let sample of samples">
+            <mat-card-header>
+                <mat-card-title><strong>{{sample.tagesnummer}}</strong></mat-card-title>
+                <mat-card-subtitle>{{sample.internal_number}} in {{sample.full_rack_position}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Erstellt am {{sample.created_at}} von {{sample.created_by|titlecase}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

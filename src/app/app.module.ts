@@ -32,6 +32,7 @@ import { HelpComponent } from './help/help.component';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorCatchingInterceptor, multi: true},
+    
   ],
   bootstrap: [AppComponent]
 })

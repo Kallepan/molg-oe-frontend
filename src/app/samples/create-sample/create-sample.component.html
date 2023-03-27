@@ -1,24 +1,29 @@
 <div class="container">
+    <h1>Gennummer verteilen</h1>
     <form [formGroup]="sampleFormGroup" class="sample-form">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Tagesnummer</mat-label>
             <input matInput placeholder="491111111102" (keydown.Tab)="submit($event)" (keyup.enter)="submit($event)"
-                formControlName="tagesnummer" type="text">
-            <mat-hint>Tagesnummer eingeben</mat-hint>
+                formControlName="tagesnummer" type="text" maxlength="13" minlength="10">
+            <mat-hint align="start">Tagesnummer eingeben und mit Enter/Tab bestätigen</mat-hint>
         </mat-form-field>
-        <mat-checkbox color="accent" formControlName="assignRack">Rack zuweisen?</mat-checkbox>
+        <mat-checkbox color="accent" formControlName="assignRack" class="checkbox">Rack zuweisen?</mat-checkbox>
     </form>
 
     <div *ngIf="(samples$ | async) as samples" class="samples-container">
-        <mat-accordion [multi]="true">
-            <mat-expansion-panel *ngFor="let sample of samples" [expanded]="true">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>{{sample.tagesnummer}}</mat-panel-title>
-                    <mat-panel-description>{{sample.internal_number}} in
-                        {{sample.full_rack_position}}</mat-panel-description>
-                </mat-expansion-panel-header>
-                <p>Erstellt am {{sample.created_at}} von {{sample.created_by}}</p>
-            </mat-expansion-panel>
-        </mat-accordion>
+        <mat-card *ngFor="let sample of samples" class="new-sample sample mat-elevation-z8" (click)="copyInternalNumber(sample.internal_number)">
+            <mat-card-header>
+                <mat-card-title><strong>{{sample.tagesnummer}}</strong></mat-card-title>
+                <mat-card-subtitle>{{sample.internal_number}} in {{sample.full_rack_position}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Erstellt am {{sample.created_at}} von {{sample.created_by|titlecase}}</p>
+                <p *ngIf="sample.archived">Archiviert am {{sample.archived_at}} von {{sample.archived_by|titlecase}}</p>
+            </mat-card-content>
+        </mat-card>
     </div>
+
+    <br />
+    <br />
+    <br />
 </div>

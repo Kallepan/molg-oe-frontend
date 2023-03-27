@@ -4,27 +4,20 @@ import { Observable, Subject } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
+import { Sample } from '../sample';
 import { SampleAPIService } from '../sample-api.service';
-
-export interface  Sample {
-  created_by: string,
-  created_at: string,
-  tagesnummer: string,
-  full_rack_position: string,
-  internal_number: string,
-}
 
 @Component({
   selector: 'app-create-sample',
   templateUrl: './create-sample.component.html',
-  styleUrls: ['./create-sample.component.scss']
+  styleUrls: ['./create-sample.component.scss'],
 })
 export class CreateSampleComponent implements OnInit {
   sampleFormGroup: FormGroup;
 
   isError = false;
 
-  noOfSamplesToDisplay = 10;
+  noOfSamplesToDisplay = 36;
 
   private _samples$: Subject<Sample[]> = new Subject<Sample[]>();
   samples$: Observable<Sample[]> = this._samples$.asObservable();
@@ -49,6 +42,10 @@ export class CreateSampleComponent implements OnInit {
           return;
         }
         const samples: Sample[] = resp.body.results;
+        const formattedSamples = samples.map(sample => {
+          sample.archived = sample.archived_at != "NA";
+          return sample;
+        });
         this._samples$.next(samples);
       },
       error: () => {
@@ -59,6 +56,15 @@ export class CreateSampleComponent implements OnInit {
 
   ngOnInit() {
     this._updateSamples();
+  }
+
+  copyInternalNumber(internalNumber: string) {
+    if (window.isSecureContext) {
+      navigator.clipboard.writeText(internalNumber);
+      this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`)
+    } else {
+      this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.")
+    }
   }
 
   submit(event: Event) {
@@ -76,20 +82,14 @@ export class CreateSampleComponent implements OnInit {
 
     this.sampleAPIService.postSample(tagesnummer, assignRack).subscribe({
       next: (resp) => {
-        console.log(resp) // TODO Copy to clipboard
         const internalNumber: string = resp.body.internal_number;
-        if (window.isSecureContext) {
-          navigator.clipboard.writeText(internalNumber);
-          this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`)
-        } else {
-          this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.")
-        }
+
+        this.copyInternalNumber(internalNumber);
 
         this._updateSamples();
       },
       error: (err) => {
         this.messageService.simpleWarnMessage(ERRORS.ERROR_UPDATE);
-        this.isError = true;
       }
     });
   }
