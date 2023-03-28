@@ -46,7 +46,7 @@ export class CreateSampleComponent implements OnInit {
           sample.archived = sample.archived_at != "NA";
           return sample;
         });
-        this._samples$.next(samples);
+        this._samples$.next(formattedSamples);
       },
       error: () => {
         this.isError = true;
@@ -65,6 +65,10 @@ export class CreateSampleComponent implements OnInit {
     } else {
       this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.")
     }
+  }
+
+  private _clearFormControls() {
+    this.sampleFormGroup.controls["tagesnummer"].reset();
   }
 
   submit(event: Event) {
@@ -87,9 +91,18 @@ export class CreateSampleComponent implements OnInit {
         this.copyInternalNumber(internalNumber);
 
         this._updateSamples();
+        this._clearFormControls();
       },
       error: (err) => {
-        this.messageService.simpleWarnMessage(ERRORS.ERROR_UPDATE);
+        const messages: string[] | undefined = err.error?.tagesnummer;
+        if (messages) {
+          const outputMessage = messages.reduce(
+            (acc, cur) => acc + cur + ".", ""
+          );
+          this.messageService.simpleWarnMessage(outputMessage);
+          return;
+        }
+        this.messageService.warnMessage(ERRORS.ERROR_API, err);
       }
     });
   }

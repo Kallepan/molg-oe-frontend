@@ -34,7 +34,7 @@ export class CONSTANTS {
     public static JWT_USERNAME_STORAGE = 'username';
 
     public static NAV_LINKS: navLink[] = [
-        { routerLink: '/hilfe',  disabled: false, displayName: "Hilfe", type: 'Information', primary: true, description: "Erklaerung der Webseite."},
+        { routerLink: '/hilfe',  disabled: false, displayName: "Hilfe", type: 'Information', primary: true, description: "Erklärung der Webseite."},
         { routerLink: '/proben/search', disabled: false, displayName: 'Suche', type: 'Probensuche', primary: true, description: 'Proben aus dem Archiv raussuchen.'},
         { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Lagerung', primary: true, description: 'Proben archivieren.'},
         { routerLink: '/proben', disabled: false, displayName: 'Proben', type: 'Eingang', primary: true, description: "Vergabe von Gennummer." },

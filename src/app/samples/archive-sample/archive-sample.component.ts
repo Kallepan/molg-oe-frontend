@@ -49,7 +49,7 @@ export class ArchiveSampleComponent implements OnInit {
           return sample;
         });
         
-        this._samples$.next(samples);
+        this._samples$.next(formattedSamples);
       },
       error: () => {
         this.isError = true;
@@ -74,7 +74,19 @@ export class ArchiveSampleComponent implements OnInit {
         this._clearFormControls();
       },
       error: (err) => {
-        this.messageService.simpleWarnMessage(ERRORS.ERROR_UPDATE);
+        if (err.status === 404) {
+          this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_SAMPLE);
+          return;
+        }
+
+        const messages: string[] | undefined = err.error?.tagesnummer + err.error?.assign_rack;
+        if (messages) {
+          const outputMessage = messages.reduce(
+            (acc, cur) => acc + cur + ".", ""
+          );
+          this.messageService.simpleWarnMessage(outputMessage);
+          return;
+        }
       }
     })
   }
