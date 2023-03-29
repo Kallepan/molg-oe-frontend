@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { interval, Observable, Subject } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -12,7 +12,7 @@ import { SampleAPIService } from '../sample-api.service';
   templateUrl: './archive-sample.component.html',
   styleUrls: ['./archive-sample.component.scss']
 })
-export class ArchiveSampleComponent implements OnInit {
+export class ArchiveSampleComponent implements OnInit, OnDestroy {
   sampleFormGroup: FormGroup;
 
   noOfSamplesToDisplay = 36;
@@ -20,6 +20,8 @@ export class ArchiveSampleComponent implements OnInit {
 
   private _samples$: Subject<Sample[]> = new Subject<Sample[]>();
   samples$: Observable<Sample[]> = this._samples$.asObservable();
+  
+  interval: any | undefined;
 
   constructor(
     private authService: AuthService,
@@ -90,8 +92,16 @@ export class ArchiveSampleComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this._updateSamples()
+  ngOnInit(): void {    
+    this._updateSamples();
+    this.interval = setInterval(() => {
+      this._updateSamples();
+    }, 10000);
   }
 
+  ngOnDestroy() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
 }

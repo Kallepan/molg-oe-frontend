@@ -1,8 +1,7 @@
-import { DialogRef } from '@angular/cdk/dialog';
-import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Observable, Subject } from 'rxjs';
+import { interval, Observable, Subject } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -15,7 +14,7 @@ import { AdditionalPrintDialogComponent } from './additional-print-dialog/additi
   templateUrl: './create-sample.component.html',
   styleUrls: ['./create-sample.component.scss'],
 })
-export class CreateSampleComponent implements OnInit {
+export class CreateSampleComponent implements OnInit, OnDestroy {
   sampleFormGroup: FormGroup;
 
   isError = false;
@@ -24,6 +23,8 @@ export class CreateSampleComponent implements OnInit {
 
   private _samples$: Subject<Sample[]> = new Subject<Sample[]>();
   samples$: Observable<Sample[]> = this._samples$.asObservable();
+
+  interval: any | undefined;
 
   constructor(
     private authService: AuthService,
@@ -58,10 +59,6 @@ export class CreateSampleComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this._updateSamples();
-  }
-
   private _copyInternalNumber(internalNumber: string) {
     if (!window.isSecureContext) {
       this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.");
@@ -90,7 +87,7 @@ export class CreateSampleComponent implements OnInit {
     };
     dialogConfig.data = data;
 
-    //TODO this.dialog.open(AdditionalPrintDialogComponent, dialogConfig);
+    this.dialog.open(AdditionalPrintDialogComponent, dialogConfig);
   }
 
   private _clearFormControls() {
@@ -153,8 +150,8 @@ export class CreateSampleComponent implements OnInit {
         const internalNumber: string = resp.body.internal_number;
         
         this._copyInternalNumber(internalNumber);
-        //TODO this._printLargeLabel(tagesnummer, internalNumber);
-        //TODO this._printSmallLabel(tagesnummer, internalNumber);
+        this._printLargeLabel(tagesnummer, internalNumber);
+        this._printSmallLabel(tagesnummer, internalNumber);
         this._updateSamples();
         this._clearFormControls();
       },
@@ -170,5 +167,20 @@ export class CreateSampleComponent implements OnInit {
         this.messageService.warnMessage(ERRORS.ERROR_API, err);
       }
     });
+  }
+
+
+  ngOnInit() {
+    this._updateSamples();
+
+    this.interval = setInterval(() => {
+      this._updateSamples();
+    }, 10000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   }
 }
