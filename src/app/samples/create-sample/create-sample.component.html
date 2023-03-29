@@ -11,7 +11,7 @@
     </form>
 
     <div *ngIf="(samples$ | async) as samples" class="samples-container">
-        <mat-card *ngFor="let sample of samples" class="new-sample sample mat-elevation-z8" (click)="onSampleClick(sample.tagesnummer, sample.internal_number)">
+        <mat-card *ngFor="let sample of samples; let i = index;" class="new-sample sample mat-elevation-z8" (click)="onSampleClick(sample.tagesnummer, sample.internal_number)">
             <mat-card-header>
                 <mat-card-title><strong>{{sample.tagesnummer}}</strong></mat-card-title>
                 <mat-card-subtitle>{{sample.internal_number}} in {{sample.full_rack_position}}</mat-card-subtitle>
@@ -20,6 +20,11 @@
                 <p>Erstellt am {{sample.created_at}} von {{sample.created_by|titlecase}}</p>
                 <p *ngIf="sample.archived">Archiviert am {{sample.archived_at}} von {{sample.archived_by|titlecase}}</p>
             </mat-card-content>
+            <mat-card-actions *ngIf="i === 0">
+                <button mat-mini-fab color="warn" (click)="deleteSample(sample.tagesnummer)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
         </mat-card>
     </div>
 

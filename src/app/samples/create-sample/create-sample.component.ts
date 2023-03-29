@@ -119,6 +119,20 @@ export class CreateSampleComponent implements OnInit {
     });
   }
 
+  deleteSample(tagesnummer: string) {
+    if(!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
+
+    this.sampleAPIService.deleteSample(tagesnummer).subscribe({
+      next: () => {
+        this._updateSamples();
+      },
+      error: () => {
+        this._updateSamples();
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
+      }
+    });
+  }
+  
   submit(event: Event) {
     event.preventDefault();
 
