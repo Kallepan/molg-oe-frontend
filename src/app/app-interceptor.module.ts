@@ -44,7 +44,6 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
           errorMsg = error.error;
         } else {
           switch(error.status) {
-            // TODO implement other error codes
             case 0:
               errorMsg = `Netzwerkfehler.`; 
               break;

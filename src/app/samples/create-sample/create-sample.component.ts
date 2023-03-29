@@ -122,6 +122,8 @@ export class CreateSampleComponent implements OnInit {
   deleteSample(tagesnummer: string) {
     if(!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
 
+    if(confirm("Möchten Sie die Probe wirklich löschen?") === false) return;
+
     this.sampleAPIService.deleteSample(tagesnummer).subscribe({
       next: () => {
         this._updateSamples();
