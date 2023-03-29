@@ -65,6 +65,19 @@ export class SampleAPIService {
     return this.http.patch(`${SAMPLES_API_ENDPOINT}${tagesnummer}/`, data, httpOptions);
   }
 
+  postDummySample(): Observable<HttpResponse<any>> {
+    const data = {
+      dummy: true
+    };
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      observe: 'response' as const
+    };
+
+    return this.http.post(`${SAMPLES_API_ENDPOINT}`, data, httpOptions);
+  }
 
   postSample(tagesnummer: string, assign_rack: boolean = false): Observable<HttpResponse<any>> {
     tagesnummer = tagesnummer.substring(0, TAGESNUMMER_MAX_LENGTH)

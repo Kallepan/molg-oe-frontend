@@ -116,6 +116,21 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     });
   }
 
+  createDummySample() {
+    if(!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
+
+    if(confirm("Möchten Sie wirklich eine Dummy Probe anlegen?") === false) return;
+
+    this.sampleAPIService.postDummySample().subscribe({
+      next: () => {
+        this._updateSamples();
+      }, error: () => {
+        this._updateSamples();
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
+      }
+    });
+  }
+
   deleteSample(tagesnummer: string) {
     if(!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
 

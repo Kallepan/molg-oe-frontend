@@ -27,6 +27,11 @@
     row-gap: 20px;
 }
 
+.actions-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 @keyframes append-animate {
     from {
         transform: translateX(-50px);

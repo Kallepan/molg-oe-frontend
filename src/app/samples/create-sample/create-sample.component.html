@@ -9,6 +9,9 @@
         </mat-form-field>
         <mat-checkbox formControlName="assignRack" class="checkbox">Sofort Archivieren?</mat-checkbox>
     </form>
+    <div class="actions-container">
+        <button mat-raised-button color="primary" (click)="createDummySample()">Fruchtwasserprobe anlegen</button>
+    </div>
 
     <div *ngIf="(samples$ | async) as samples" class="samples-container">
         <mat-card *ngFor="let sample of samples; let i = index;" class="new-sample sample mat-elevation-z8" (click)="onSampleClick(sample.tagesnummer, sample.internal_number)">
