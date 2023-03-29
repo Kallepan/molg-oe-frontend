@@ -19,7 +19,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
   isError = false;
 
-  noOfSamplesToDisplay = 36;
+  noOfSamplesToDisplay = 12;
 
   private _samples$: Subject<Sample[]> = new Subject<Sample[]>();
   samples$: Observable<Sample[]> = this._samples$.asObservable();
@@ -36,7 +36,8 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
     this.sampleFormGroup = fb.group({
       tagesnummer: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(10), Validators.maxLength(12)]],
-      assignRack: [false, []]
+      assignRack: [false, []],
+      print: [true, []]
     })
   }
 
@@ -159,14 +160,17 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
     const tagesnummer = this.sampleFormGroup.controls["tagesnummer"].value;
     const assignRack = this.sampleFormGroup.controls["assignRack"].value;
+    const print = this.sampleFormGroup.controls["print"].value;
 
     this.sampleAPIService.postSample(tagesnummer, assignRack).subscribe({
       next: (resp) => {
         const internalNumber: string = resp.body.internal_number;
         
         this._copyInternalNumber(internalNumber);
-        this._printLargeLabel(tagesnummer, internalNumber);
-        this._printSmallLabel(tagesnummer, internalNumber);
+        if(print) {
+          this._printLargeLabel(tagesnummer, internalNumber);
+          this._printSmallLabel(tagesnummer, internalNumber);
+        }
         this._updateSamples();
         this._clearFormControls();
       },
