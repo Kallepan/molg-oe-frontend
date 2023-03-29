@@ -8,3 +8,8 @@ export interface  Sample {
     archived_by?: string,
     archived: boolean,
   }
+
+export type PrintSample = {
+  tagesnummer: string,
+  internalNumber: string
+} 

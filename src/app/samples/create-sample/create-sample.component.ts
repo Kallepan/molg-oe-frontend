@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { DialogRef } from '@angular/cdk/dialog';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Observable, Subject } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
-import { Sample } from '../sample';
+import { PrintSample, Sample } from '../sample';
 import { SampleAPIService } from '../sample-api.service';
+import { AdditionalPrintDialogComponent } from './additional-print-dialog/additional-print-dialog.component';
 
 @Component({
   selector: 'app-create-sample',
@@ -25,7 +28,8 @@ export class CreateSampleComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private messageService: MessageService,
-    private sampleAPIService: SampleAPIService
+    private sampleAPIService: SampleAPIService,
+    private dialog: MatDialog,
   ) {
     const fb = new FormBuilder();
 
@@ -58,17 +62,61 @@ export class CreateSampleComponent implements OnInit {
     this._updateSamples();
   }
 
-  copyInternalNumber(internalNumber: string) {
-    if (window.isSecureContext) {
-      navigator.clipboard.writeText(internalNumber);
-      this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`)
-    } else {
-      this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.")
+  private _copyInternalNumber(internalNumber: string) {
+    if (!window.isSecureContext) {
+      this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.");
+      return;
     }
+
+    navigator.clipboard.writeText(internalNumber);
+    this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`);
+  }
+
+  onSampleClick(tagesnummer: string, internalNumber: string) {
+    if (!window.isSecureContext) {
+      this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.");
+      return;
+    }
+    
+    navigator.clipboard.writeText(internalNumber);
+    this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`);
+
+    const dialogConfig =  new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    const data: PrintSample = {
+      tagesnummer: tagesnummer,
+      internalNumber: internalNumber
+    };
+    dialogConfig.data = data;
+
+    //TODO this.dialog.open(AdditionalPrintDialogComponent, dialogConfig);
   }
 
   private _clearFormControls() {
     this.sampleFormGroup.controls["tagesnummer"].reset();
+  }
+
+  private _printLargeLabel(tagesnummer: string, internal_number: string) {
+    this.sampleAPIService.printLabel(tagesnummer, internal_number, "largePrinter").subscribe({
+      next: () => {
+
+      },
+      error: () => {
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
+      }
+    });
+  }
+
+  private _printSmallLabel(tagesnummer: string, internal_number: string) {
+    this.sampleAPIService.printLabel(tagesnummer, internal_number, "smallPrinter").subscribe({
+      next: () => {
+
+      },
+      error: () => {
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
+      }
+    });
   }
 
   submit(event: Event) {
@@ -87,9 +135,10 @@ export class CreateSampleComponent implements OnInit {
     this.sampleAPIService.postSample(tagesnummer, assignRack).subscribe({
       next: (resp) => {
         const internalNumber: string = resp.body.internal_number;
-
-        this.copyInternalNumber(internalNumber);
-
+        
+        this._copyInternalNumber(internalNumber);
+        //TODO this._printLargeLabel(tagesnummer, internalNumber);
+        //TODO this._printSmallLabel(tagesnummer, internalNumber);
         this._updateSamples();
         this._clearFormControls();
       },
@@ -97,7 +146,7 @@ export class CreateSampleComponent implements OnInit {
         const messages: string[] | undefined = err.error?.tagesnummer;
         if (messages) {
           const outputMessage = messages.reduce(
-            (acc, cur) => acc + cur + ".", ""
+            (acc, cur) => acc + cur + "", ""
           );
           this.messageService.simpleWarnMessage(outputMessage);
           return;

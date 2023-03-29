@@ -14,4 +14,6 @@ export class ERRORS {
     public static ERROR_UPDATE = "Das Sample konnte nicht gespeichert werden.";
 
     public static ERROR_NO_SAMPLE = "Es wurde keine Probe zur Tagesnummer/Gennummer gefunden.";
+
+    public static ERROR_NO_PRINT = "Das Drucken hat nicht funktioniert.";
 }

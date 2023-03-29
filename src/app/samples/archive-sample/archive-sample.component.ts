@@ -78,8 +78,7 @@ export class ArchiveSampleComponent implements OnInit {
           this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_SAMPLE);
           return;
         }
-
-        const messages: string[] | undefined = err.error?.tagesnummer + err.error?.assign_rack;
+        const messages: string[] | undefined = err.error?.assign_rack;
         if (messages) {
           const outputMessage = messages.reduce(
             (acc, cur) => acc + cur + ".", ""

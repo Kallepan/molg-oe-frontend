@@ -3,16 +3,42 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CONSTANTS } from '../config/constants';
 
-const SAMPLES_API_ENDPOINT = `${CONSTANTS.GLOBAL_API_ENDPOINT}/samples/`
+const SAMPLES_API_ENDPOINT = `${CONSTANTS.GLOBAL_API_ENDPOINT}/samples/`;
+const PRINT_LABEL_API_ENDPOINT = `${CONSTANTS.GLOBAL_API_ENDPOINT}/print_label`;
+const TAGESNUMMER_MAX_LENGTH = 10;
+/* 
+Note: Tagesnummer string should always be of length 10
+  Use: substring function()
+  */
 
 @Injectable({
   providedIn: 'root'
 })
 export class SampleAPIService {
-
   constructor(private http: HttpClient) { }
+  printers = CONSTANTS.PRINTERS;
+
+  printLabel(tagesnummer: string, internal_number: string, printerType: "largePrinter" | "smallPrinter"): Observable<HttpResponse<any>> {
+
+    const data = {
+      tagesnummer: tagesnummer,
+      internal_number: internal_number,
+      printer_type: printerType,
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      observe: 'response' as const
+    };
+
+
+    return this.http.post(PRINT_LABEL_API_ENDPOINT, data, httpOptions);
+  }
 
   assignRackPosition(tagesnummer: string): Observable<HttpResponse<any>> {
+    tagesnummer = tagesnummer.substring(0, TAGESNUMMER_MAX_LENGTH)
     const data = {
       assign_rack: true,
     };
@@ -29,6 +55,7 @@ export class SampleAPIService {
 
 
   postSample(tagesnummer: string, assign_rack: boolean = false): Observable<HttpResponse<any>> {
+    tagesnummer = tagesnummer.substring(0, TAGESNUMMER_MAX_LENGTH)
     const data = {
       tagesnummer: tagesnummer,
       assign_rack: assign_rack,
@@ -45,6 +72,7 @@ export class SampleAPIService {
   }
 
   getSampleByTagesnummer(tagesnummer: string): Observable<HttpResponse<any>> {
+    tagesnummer = tagesnummer.substring(0, TAGESNUMMER_MAX_LENGTH)
     const params = {
       tagesnummer: tagesnummer,
     };

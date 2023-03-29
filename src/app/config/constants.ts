@@ -15,6 +15,14 @@ export interface navLink {
     disabled: boolean;
 }
 
+export type Printer = {
+    name: string,
+    address: string,
+    x1: number,
+    x2: number,
+    y1: number,
+    y2: number,
+};
 export class CONSTANTS {
     public static TITLE = "MOLG OrderEntry"
     public static VERSION = "1.0.0"
@@ -34,10 +42,16 @@ export class CONSTANTS {
     public static JWT_USERNAME_STORAGE = 'username';
 
     public static NAV_LINKS: navLink[] = [
-        { routerLink: '/hilfe',  disabled: false, displayName: "Hilfe", type: 'Information', primary: true, description: "Erklärung der Webseite."},
-        { routerLink: '/proben/search', disabled: false, displayName: 'Suche', type: 'Probensuche', primary: true, description: 'Proben aus dem Archiv raussuchen.'},
-        { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Lagerung', primary: true, description: 'Proben archivieren.'},
+        { routerLink: '/hilfe', disabled: false, displayName: "Hilfe", type: 'Information', primary: true, description: "Erklärung der Webseite." },
+        { routerLink: '/proben/search', disabled: false, displayName: 'Suche', type: 'Probensuche', primary: true, description: 'Proben aus dem Archiv raussuchen.' },
+        { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Lagerung', primary: true, description: 'Proben archivieren.' },
         { routerLink: '/proben', disabled: false, displayName: 'Proben', type: 'Eingang', primary: true, description: "Vergabe von Gennummer." },
+    ]
+
+
+    public static PRINTERS: Printer[] = [
+        { name: "largePrinter", address: (window.isSecureContext ? "http://" : "http://") + "bc-molg.labmed.de" + "/pstprnt", x1: 180, x2: 165, y1: 80, y2: 120 },
+        { name: "smallPrinter", address: (window.isSecureContext ? "http://" : "http://") + "bc-cyto.labmed.de" + "/pstprnt", x1: 10, x2: 0, y1: 30, y2: 60 },
     ]
 }
 

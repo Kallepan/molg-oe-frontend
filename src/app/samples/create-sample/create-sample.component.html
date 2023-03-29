@@ -11,7 +11,7 @@
     </form>
 
     <div *ngIf="(samples$ | async) as samples" class="samples-container">
-        <mat-card *ngFor="let sample of samples" class="new-sample sample mat-elevation-z8" (click)="copyInternalNumber(sample.internal_number)">
+        <mat-card *ngFor="let sample of samples" class="new-sample sample mat-elevation-z8" (click)="onSampleClick(sample.tagesnummer, sample.internal_number)">
             <mat-card-header>
                 <mat-card-title><strong>{{sample.tagesnummer}}</strong></mat-card-title>
                 <mat-card-subtitle>{{sample.internal_number}} in {{sample.full_rack_position}}</mat-card-subtitle>
