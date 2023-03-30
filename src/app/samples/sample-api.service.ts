@@ -5,6 +5,7 @@ import { CONSTANTS } from '../config/constants';
 
 const SAMPLES_API_ENDPOINT = `${CONSTANTS.GLOBAL_API_ENDPOINT}/samples/`;
 const PRINT_LABEL_API_ENDPOINT = `${CONSTANTS.GLOBAL_API_ENDPOINT}/print_label`;
+const EXPORT_SAMPLE_API_ENDPOINT = `${CONSTANTS.GLOBAL_API_ENDPOINT}/export_samples`;
 const TAGESNUMMER_MAX_LENGTH = 10;
 /* 
 Note: Tagesnummer string should always be of length 10
@@ -17,6 +18,24 @@ Note: Tagesnummer string should always be of length 10
 export class SampleAPIService {
   constructor(private http: HttpClient) { }
   printers = CONSTANTS.PRINTERS;
+
+  requestExportBySample(year: string, month: string, day: string): Observable<HttpResponse<any>> {
+    const data = {
+      year: year,
+      month: month,
+      day: day,
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      observe: 'response' as const,
+      responseType: 'blob' as const,
+    };
+
+    return this.http.post(EXPORT_SAMPLE_API_ENDPOINT, data, httpOptions);
+  }
 
   printLabel(tagesnummer: string, internal_number: string, printerType: "largePrinter" | "smallPrinter"): Observable<HttpResponse<any>> {
 

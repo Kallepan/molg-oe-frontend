@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Proben exportieren</h1>
+    <mat-form-field appearance="outline">
+        <mat-label>Datum zum exportieren auswählen</mat-label>
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [formControl]="dateFormControl"
+            [min]="minDate" [max]="maxDate">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button class="form-button" mat-raised-button color="primary" (click)="submit()">Exportieren</button>
+</div>

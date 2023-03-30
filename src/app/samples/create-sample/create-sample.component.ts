@@ -79,6 +79,9 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     navigator.clipboard.writeText(internalNumber);
     this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`);
 
+    // Option to print another label
+    if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
+
     const dialogConfig =  new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = false;

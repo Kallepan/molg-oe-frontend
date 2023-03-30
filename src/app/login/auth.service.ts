@@ -45,7 +45,7 @@ export class AuthService {
   register(username: string, password: string, first_name: string, last_name: string, email: string, dialogRef: any) {
     this._createUser(username, password, first_name, last_name, email).subscribe({
       error: (err) => {
-        this.messageService.warnMessage(ERRORS.ERROR_API, err);
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
       }, next: (resp) => {
         this.messageService.goodMessage("Nutzer angelegt... Login kann nun erfolgen...");
         dialogRef?.close();
@@ -75,7 +75,7 @@ export class AuthService {
   login(username: string, password: string, dialogRef: any) {
     this._fetchToken(username, password).subscribe({
       error: (err) => {
-        this.messageService.warnMessage(ERRORS.ERROR_API, err);
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
       }, next: (resp) => {
         const expiresAt = Date.now() + CONSTANTS.TOKEN_EXPIRY_TIME;
         localStorage.setItem(CONSTANTS.JWT_ACCESS_TOKEN_STORAGE, resp.body.access);

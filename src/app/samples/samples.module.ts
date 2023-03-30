@@ -8,13 +8,15 @@ import { ArchiveSampleComponent } from './archive-sample/archive-sample.componen
 import { SearchSampleComponent } from './search-sample/search-sample.component';
 import { AdditionalPrintDialogComponent } from './create-sample/additional-print-dialog/additional-print-dialog.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ExportComponent } from './create-sample/export/export.component';
 
 @NgModule({
   declarations: [
     CreateSampleComponent,
     ArchiveSampleComponent,
     SearchSampleComponent,
-    AdditionalPrintDialogComponent
+    AdditionalPrintDialogComponent,
+    ExportComponent
   ],
   imports: [
     CommonModule,

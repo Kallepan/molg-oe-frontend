@@ -16,7 +16,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -28,6 +28,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'; 
+import { MatDatepickerModule } from '@angular/material/datepicker'; 
 
 @NgModule({
   imports: [
@@ -58,7 +59,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ClipboardModule,
     MatMenuModule,
     MatButtonToggleModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatSidenavModule,
@@ -89,7 +92,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ClipboardModule,
     MatMenuModule,
     MatButtonToggleModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   declarations: []
 })
