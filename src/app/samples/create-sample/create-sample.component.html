@@ -15,12 +15,12 @@
     </div>
 
     <div *ngIf="(samples$ | async) as samples" class="samples-container">
-        <mat-card *ngFor="let sample of samples; let i = index;" class="new-sample sample mat-elevation-z8" (click)="onSampleClick(sample.tagesnummer, sample.internal_number)">
-            <mat-card-header>
+        <mat-card *ngFor="let sample of samples; let i = index;" class="new-sample sample mat-elevation-z8">
+            <mat-card-header (click)="onSampleClick(sample.tagesnummer, sample.internal_number)">
                 <mat-card-title><strong>{{sample.tagesnummer}}</strong></mat-card-title>
                 <mat-card-subtitle>{{sample.internal_number}} in {{sample.full_rack_position}}</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content (click)="onSampleClick(sample.tagesnummer, sample.internal_number)">
                 <p>Erstellt am {{sample.created_at}} von {{sample.created_by|titlecase}}</p>
                 <p *ngIf="sample.archived">Archiviert am {{sample.archived_at}} von {{sample.archived_by|titlecase}}</p>
             </mat-card-content>

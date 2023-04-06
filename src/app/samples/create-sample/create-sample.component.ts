@@ -126,7 +126,8 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     if(confirm("Möchten Sie wirklich eine Dummy Probe anlegen?") === false) return;
 
     this.sampleAPIService.postDummySample().subscribe({
-      next: () => {
+      next: (resp) => {
+        this._copyInternalNumber(resp.body.internal_number);
         this._updateSamples();
       }, error: () => {
         this._updateSamples();

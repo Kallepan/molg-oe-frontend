@@ -3,9 +3,12 @@ kind: Ingress
 metadata:
   name: oe-ingress
   namespace: genetics
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
-  - host: "molg-oe.dev-k8s.labmed.de"
+  - host: "molg-oe.labmed.de"
     http:
       paths:
       - path: /
@@ -17,3 +20,4 @@ spec:
               name: web
   tls:
   - secretName: labmed-tls
+

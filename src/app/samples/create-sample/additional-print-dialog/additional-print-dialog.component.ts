@@ -39,7 +39,7 @@ export class AdditionalPrintDialogComponent {
   }
 
   printSmallLabel() {
-    this.sampleAPIService.printLabel(this._internalNumber, this._internalNumber, "smallPrinter").subscribe({
+    this.sampleAPIService.printLabel(this._tagesnummer, this._internalNumber, "smallPrinter").subscribe({
       next: () => {
 
       },
