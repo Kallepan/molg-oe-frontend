@@ -1,0 +1,31 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: molg-oe-ingressroute
+  namespace: genetics
+spec:
+  entryPoints:
+  - web
+  - websecure
+  routes:
+  - match: Host(`molg-oe.dev-k8s.labmed.de`) && PathPrefix(`/`)
+    kind: Rule
+    middlewares:
+    - name: redirect-to-https
+      namespace: genetics
+    services:
+    - kind: Service
+      name: oe-frontend
+      namespace: genetics
+      passHostHeader: true
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-to-https
+  namespace: genetics
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true

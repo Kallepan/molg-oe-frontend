@@ -1,3 +1,4 @@
+# This file is no longer used, but kept for reference
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -18,6 +19,3 @@ spec:
             name: oe-frontend
             port:
               name: web
-  tls:
-  - secretName: labmed-tls
-
