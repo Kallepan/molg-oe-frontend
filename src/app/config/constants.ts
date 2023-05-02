@@ -1,11 +1,6 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { environment } from "../environments/environment";
 
-export interface CustomError {
-    status: number,
-    message: string,
-    error: any,
-}
 export interface navLink {
     routerLink: string;
     displayName: string;

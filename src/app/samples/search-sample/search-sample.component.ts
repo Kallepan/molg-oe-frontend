@@ -73,7 +73,7 @@ export class SearchSampleComponent {
       },
       error: (err) => {
         this.isLoaded = true;
-        this.messageService.warnMessage(ERRORS.ERROR_API, err)
+        this.messageService.simpleWarnMessage(err.message)
       }
     });
   }
@@ -103,7 +103,7 @@ export class SearchSampleComponent {
       },
       error: (err) => {
         this.isLoaded = true;
-        this.messageService.warnMessage(ERRORS.ERROR_API, err)
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
       }
     });
 

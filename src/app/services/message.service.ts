@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CustomError } from '../config/constants';
 
 const SHORT_TIME_TILL_DISAPPEARANCE = 2000;
 const LONG_TIME_TILL_DISAPPEARANCE = 10000;
@@ -23,14 +22,6 @@ export class MessageService {
       duration: SHORT_TIME_TILL_DISAPPEARANCE,
       panelClass: ['success-snackbar']
     })
-  }
-
-  warnMessage(userMessage: string, programmingMessage: CustomError) {
-    const message = userMessage + ". " + programmingMessage.message;
-    this._snackbar.open(message, CONFIRM_ACTION, {
-      duration: LONG_TIME_TILL_DISAPPEARANCE,
-      panelClass: ["warn-snackbar"],
-    });
   }
 
   simpleWarnMessage(userMessage: string) {

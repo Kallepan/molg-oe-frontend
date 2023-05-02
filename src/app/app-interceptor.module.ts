@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from "./login/auth.service";
-import { CONSTANTS, CustomError } from "./config/constants";
+import { CONSTANTS } from "./config/constants";
 
 @Injectable()
 export class GlobalInterceptor implements HttpInterceptor {
@@ -60,7 +60,8 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
               errorMsg = `Message: ${error.message}`;
           }
         }
-        const ERR: CustomError = {
+
+        const ERR = {
           status: error.status,
           message: errorMsg,
           error: error.error,

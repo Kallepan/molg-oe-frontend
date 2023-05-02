@@ -75,7 +75,9 @@ export class AuthService {
   login(username: string, password: string, dialogRef: any) {
     this._fetchToken(username, password).subscribe({
       error: (err) => {
-        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
+        if (err.status == 401) {
+          this.messageService.simpleWarnMessage(ERRORS.INVALID_CREDENTIALS);
+        }
       }, next: (resp) => {
         const expiresAt = Date.now() + CONSTANTS.TOKEN_EXPIRY_TIME;
         localStorage.setItem(CONSTANTS.JWT_ACCESS_TOKEN_STORAGE, resp.body.access);

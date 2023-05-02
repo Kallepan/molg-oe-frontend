@@ -1,7 +1,7 @@
 export class ERRORS {
     public static ERROR_API = "Die Kommunikation mit der Datenbank hat nicht funktioniert";
     public static ERROR_LOGIN = "Bitte zuerst einloggen";
-
+    public static INVALID_CREDENTIALS = "Bitte gültige Zugangsdaten eingeben";
     public static ERROR_NO_FILE_UPLOADED = "Bitte zuerst eine Datei hochladen";
     public static ERROR_UPLOAD = "Etwas ist beim hochladen der Datei schiefgelaufen";
     public static ERROR_DOWNLOAD = "Etwas ist beim herunterladen schiefgelaufen";

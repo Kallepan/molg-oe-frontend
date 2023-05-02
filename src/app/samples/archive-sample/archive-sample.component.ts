@@ -88,6 +88,8 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
           this.messageService.simpleWarnMessage(outputMessage);
           return;
         }
+
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
       }
     })
   }

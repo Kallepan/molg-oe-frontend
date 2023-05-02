@@ -180,6 +180,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         const messages: string[] | undefined = err.error?.tagesnummer;
+
         if (messages) {
           const outputMessage = messages.reduce(
             (acc, cur) => acc + cur + "", ""
@@ -187,7 +188,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
           this.messageService.simpleWarnMessage(outputMessage);
           return;
         }
-        this.messageService.warnMessage(ERRORS.ERROR_API, err);
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
       }
     });
   }
