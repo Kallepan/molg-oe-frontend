@@ -1,12 +1,12 @@
-<mat-toolbar class="mat-elevation-z8" color="primary">
+<mat-toolbar class="mat-elevation-z8 header" color="primary">
   <span>
-    <a class="header-title" routerLink="/">{{title}}</a>
+    <div class="header-title" routerLink="/">{{title}}</div>
   </span>
   <span class="small-spacer"></span>
   <div *ngFor="let navLink of primaryNavLinks">
     <span class="small-spacer"></span>
-    <a mat-button routerLinkActive="is-active" [routerLink]="navLink.routerLink" class="header-link"
-      [disabled]="navLink.disabled">{{navLink.displayName}}<br><small>{{navLink.type}}</small></a>
+    <button mat-button routerLinkActive="is-active" [routerLink]="navLink.routerLink" class="header-link"
+      [disabled]="navLink.disabled">{{navLink.displayName}}<br><small>{{navLink.type}}</small></button>
   </div>
   <span class="small-spacer"></span>
 

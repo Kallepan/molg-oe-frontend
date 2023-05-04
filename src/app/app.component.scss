@@ -1,3 +1,4 @@
+@import '../variables.scss';
 .small-spacer {
     margin-left: 10px;
     margin-right: 10px;
@@ -6,18 +7,26 @@
     flex: 1 1 auto;
 }
 
-.header-title {
-    text-align: center;
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 32px;
+.header {
+    .header-title {
+        text-align: center;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 32px;
+        
+    }
+    .header-title:hover {
+        cursor: pointer;
+        
+    }
+
+    .header-link {
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+    }
 }
-.header-link {
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-}
+
 
 .footer {
     background-color: rgba($color: black, $alpha: 0.8);

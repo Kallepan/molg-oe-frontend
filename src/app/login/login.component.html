@@ -1,8 +1,8 @@
-<button class="small-login-button" *ngIf="!isAuthenticated()" mat-icon-button (click)="openAuthDialog()">
+<button class="small-login-button" *ngIf="!isAuthenticated()" mat-icon-button color="accent" (click)="openAuthDialog()">
     <mat-icon>account_circle</mat-icon>
 </button>
 
 <div class="logged-in-container" *ngIf="isAuthenticated()">
     <div>Eingeloggt als: <strong>{{getUsername()|titlecase}}</strong></div>
-    <button mat-raised-button (click)="logout()">Logout</button>
+    <button mat-raised-button (click)="logout()" color="accent">Logout</button>
 </div>

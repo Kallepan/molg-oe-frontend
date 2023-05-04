@@ -11,7 +11,7 @@
         <mat-checkbox formControlName="print" class="checkbox">Sofort Drucken?</mat-checkbox>
     </form>
     <div class="actions-container">
-        <button mat-raised-button color="primary" (click)="createDummySample()">Fruchtwasserprobe anlegen</button>
+        <button mat-raised-button color="accent" (click)="createDummySample()">Fruchtwasserprobe anlegen</button>
     </div>
 
     <div *ngIf="(samples$ | async) as samples" class="samples-container">
