@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { interval, Observable, Subject } from 'rxjs';
+import { interval, map, Observable, Subject } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -22,7 +22,15 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
   noOfSamplesToDisplay = 12;
 
   private _samples$: Subject<Sample[]> = new Subject<Sample[]>();
-  samples$: Observable<Sample[]> = this._samples$.asObservable();
+  samples$: Observable<Sample[]> = this._samples$.asObservable().pipe(
+    map(samples => {
+      samples.forEach(sample => {
+        sample.displaySampleId = sample.tagesnummer.slice(0, 2) + " " + sample.tagesnummer.slice(2, 6) + " " + sample.tagesnummer.slice(6,10);
+      });
+
+      return samples;
+    })
+  );
 
   interval: any | undefined;
 
@@ -81,7 +89,6 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
     // Option to print another label
     if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
-
     const dialogConfig =  new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = false;

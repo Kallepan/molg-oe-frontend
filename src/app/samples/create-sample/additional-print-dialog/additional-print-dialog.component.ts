@@ -19,12 +19,11 @@ export class AdditionalPrintDialogComponent {
     public dialogRef: MatDialogRef<AdditionalPrintDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PrintSample,
     private sampleAPIService: SampleAPIService,
-    private messageService: MessageService) {
-
-      this._internalNumber = data.internalNumber;
-      this._tagesnummer = data.tagesnummer;
-
-    }
+    private messageService: MessageService
+  ) {
+    this._internalNumber = data.internalNumber;
+    this._tagesnummer = data.tagesnummer;
+  }
 
 
   printLargeLabel() {

@@ -4,8 +4,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
-import { Sample } from '../sample';
+import { PrintSample, Sample } from '../sample';
 import { SampleAPIService } from '../sample-api.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AdditionalPrintDialogComponent } from '../create-sample/additional-print-dialog/additional-print-dialog.component';
 
 @Component({
   selector: 'app-search-sample',
@@ -24,6 +26,7 @@ export class SearchSampleComponent {
     private messageService: MessageService,
     private authService: AuthService,
     private sampleAPIService: SampleAPIService,
+    private dialog: MatDialog,
   ) {
     const fb = new FormBuilder();
 
@@ -106,6 +109,42 @@ export class SearchSampleComponent {
         this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
       }
     });
+  }
 
+  printSample(sample: Sample) {
+    // Option to print another label
+    if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
+    const dialogConfig =  new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    const data: PrintSample = {
+      tagesnummer: sample.tagesnummer,
+      internalNumber: sample.internal_number
+    };
+    dialogConfig.data = data;
+
+    this.dialog.open(AdditionalPrintDialogComponent, dialogConfig);
+  }
+
+  private _printLargeLabel(tagesnummer: string, internal_number: string) {
+    this.sampleAPIService.printLabel(tagesnummer, internal_number, "largePrinter").subscribe({
+      next: () => {
+
+      },
+      error: () => {
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
+      }
+    });
+  }
+
+  private _printSmallLabel(tagesnummer: string, internal_number: string) {
+    this.sampleAPIService.printLabel(tagesnummer, internal_number, "smallPrinter").subscribe({
+      next: () => {
+
+      },
+      error: () => {
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
+      }
+    });
   }
 }

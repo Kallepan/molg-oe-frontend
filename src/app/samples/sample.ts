@@ -8,6 +8,9 @@ export interface  Sample {
     archived_by?: string,
     archived: boolean,
     dummy?: boolean,
+
+    
+    displaySampleId?: string,
   }
 
 export type PrintSample = {
