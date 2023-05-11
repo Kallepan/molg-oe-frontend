@@ -8,7 +8,7 @@ export interface navLink {
     primary: boolean;
     type?: string;
     disabled: boolean;
-}
+};
 
 export type Printer = {
     name: string,
@@ -20,7 +20,7 @@ export type Printer = {
 };
 export class CONSTANTS {
     public static TITLE = "MOLG OrderEntry"
-    public static VERSION = "1.0.6alpha"
+    public static VERSION = "1.0.7"
 
     public static GLOBAL_API_ENDPOINT = environment.apiUrl;
     public static AUTH_API_ENDPOINT = environment.authUrl;

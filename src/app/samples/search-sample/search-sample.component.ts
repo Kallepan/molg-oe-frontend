@@ -65,8 +65,9 @@ export class SearchSampleComponent {
       return;
     }
 
-    const tagesnummer: string = this.sampleFormGroup.controls["tagesnummer"].value;
-
+    let tagesnummer: string = this.sampleFormGroup.controls["tagesnummer"].value;
+    tagesnummer = tagesnummer.replace(/\s+/g, "");
+    
     this.sampleAPIService.getSampleByTagesnummer(tagesnummer).subscribe({
       next: (resp) => {
         this.isLoaded = true;
