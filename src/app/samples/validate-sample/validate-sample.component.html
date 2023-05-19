@@ -1,0 +1,23 @@
+<div class="container">
+    <h3>Tagesnummer validieren</h3>
+    <table>
+        <tr>
+            <th>Vorherige Eingabe:</th>
+            <td>{{originalSampleId}}</td>
+        </tr>
+        <tr>
+            <th>Aktuelle Eingabe:</th>
+            <td>
+                <span *ngFor="let colorEncoding of getColorEncoding()" [ngStyle]="{'background-color': colorEncoding.color}">{{colorEncoding.char}}</span>
+            </td>
+        </tr>
+    </table>
+    <form class="form" [formGroup]="validationFormGroup">
+        <mat-form-field class="large-form-field">
+            <mat-label>Tagesnummer</mat-label>
+            <input matInput placeholder="491111111102" (keydown.Tab)="confirm()" (keyup.enter)="confirm()"
+                formControlName="copySampleId" type="text" maxlength="12" minlength="10">
+            <mat-hint align="start">Bitte die gleiche Probe nochmal scannen</mat-hint>
+        </mat-form-field>
+    </form>
+</div>

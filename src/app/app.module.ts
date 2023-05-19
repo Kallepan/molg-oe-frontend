@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { ErrorCatchingInterceptor, GlobalInterceptor } from './app-interceptor.module';
 import { HelpComponent } from './help/help.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HelpComponent } from './help/help.component';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorCatchingInterceptor, multi: true},
-    
+    {provide: MAT_DIALOG_DATA, useValue: {}},
+    {provide: MatDialogRef, useValue: {}},
   ],
   bootstrap: [AppComponent]
 })

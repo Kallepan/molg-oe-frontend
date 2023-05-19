@@ -9,6 +9,7 @@ import { SearchSampleComponent } from './search-sample/search-sample.component';
 import { AdditionalPrintDialogComponent } from './create-sample/additional-print-dialog/additional-print-dialog.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExportComponent } from './create-sample/export/export.component';
+import { ValidateSampleComponent } from './validate-sample/validate-sample.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ExportComponent } from './create-sample/export/export.component';
     ArchiveSampleComponent,
     SearchSampleComponent,
     AdditionalPrintDialogComponent,
-    ExportComponent
+    ExportComponent,
+    ValidateSampleComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,9 @@ import { ExportComponent } from './create-sample/export/export.component';
     SampleRoutingModule,
   ],
   providers: [
-    {provide: MAT_DIALOG_DATA, useValue: {}},
+    {provide: MAT_DIALOG_DATA, useValue: {
+      originalSampleId: null,
+    }},
     {provide: MatDialogRef, useValue: {}},
   ]
 })

@@ -16,4 +16,7 @@ export class ERRORS {
     public static ERROR_NO_SAMPLE = "Es wurde keine Probe zur Tagesnummer/Gennummer gefunden.";
 
     public static ERROR_NO_PRINT = "Das Drucken hat nicht funktioniert.";
+
+    public static VALIDATION_FAILED = "Die Validation ist fehlgeschlagen.";
+    public static INVALID_TAGESNUMMER = "Die Tagesnummer ist ungültig.";
 }

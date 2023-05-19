@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExportComponent } from './export.component';
+import { ValidateSampleComponent } from './validate-sample.component';
+import { SamplesModule } from '../samples.module';
 import { AppModule } from 'src/app/app.module';
-import { SamplesModule } from '../../samples.module';
 
-describe('ExportComponent', () => {
-  let component: ExportComponent;
-  let fixture: ComponentFixture<ExportComponent>;
+describe('ValidateSampleComponent', () => {
+  let component: ValidateSampleComponent;
+  let fixture: ComponentFixture<ValidateSampleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExportComponent ],
+      declarations: [ ValidateSampleComponent ],
       imports: [SamplesModule, AppModule]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ExportComponent);
+    fixture = TestBed.createComponent(ValidateSampleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,6 +8,7 @@ import { MessageService } from 'src/app/services/message.service';
 import { PrintSample, Sample } from '../sample';
 import { SampleAPIService } from '../sample-api.service';
 import { AdditionalPrintDialogComponent } from './additional-print-dialog/additional-print-dialog.component';
+import { ValidateSampleComponent } from '../validate-sample/validate-sample.component';
 
 @Component({
   selector: 'app-create-sample',
@@ -25,7 +26,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
   samples$: Observable<Sample[]> = this._samples$.asObservable().pipe(
     map(samples => {
       samples.forEach(sample => {
-        sample.displaySampleId = sample.tagesnummer.slice(0, 2) + " " + sample.tagesnummer.slice(2, 6) + " " + sample.tagesnummer.slice(6,10);
+        sample.displaySampleId = sample.tagesnummer.slice(0, 2) + " " + sample.tagesnummer.slice(2, 6) + " " + sample.tagesnummer.slice(6, 10);
       });
 
       return samples;
@@ -83,13 +84,13 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
       this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.");
       return;
     }
-    
+
     navigator.clipboard.writeText(internalNumber);
     this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`);
 
     // Option to print another label
     if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
-    const dialogConfig =  new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = false;
     const data: PrintSample = {
@@ -128,9 +129,9 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
   }
 
   createDummySample() {
-    if(!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
+    if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
 
-    if(confirm("Möchten Sie wirklich eine Dummy Probe anlegen?") === false) return;
+    if (confirm("Möchten Sie wirklich eine Dummy Probe anlegen?") === false) return;
 
     this.sampleAPIService.postDummySample().subscribe({
       next: (resp) => {
@@ -144,9 +145,9 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
   }
 
   deleteSample(tagesnummer: string) {
-    if(!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
+    if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
 
-    if(confirm("Möchten Sie die Probe wirklich löschen?") === false) return;
+    if (confirm("Möchten Sie die Probe wirklich löschen?") === false) return;
 
     this.sampleAPIService.deleteSample(tagesnummer).subscribe({
       next: () => {
@@ -158,7 +159,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+
   submit(event: Event) {
     event.preventDefault();
 
@@ -173,30 +174,46 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     const assignRack = this.sampleFormGroup.controls["assignRack"].value;
     const print = this.sampleFormGroup.controls["print"].value;
 
-    this.sampleAPIService.postSample(tagesnummer, assignRack).subscribe({
-      next: (resp) => {
-        const internalNumber: string = resp.body.internal_number;
-        
-        this._copyInternalNumber(internalNumber);
-        if(print) {
-          this._printLargeLabel(tagesnummer, internalNumber);
-          this._printSmallLabel(tagesnummer, internalNumber);
-        }
-        this._updateSamples();
-        this._clearFormControls();
-      },
-      error: (err) => {
-        const messages: string[] | undefined = err.error?.tagesnummer;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.autoFocus = true;
+    const data = {
+      originalSampleId: tagesnummer,
+    }
+    dialogConfig.data = data;
 
-        if (messages) {
-          const outputMessage = messages.reduce(
-            (acc, cur) => acc + cur + "", ""
-          );
-          this.messageService.simpleWarnMessage(outputMessage);
-          return;
-        }
-        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
+    this.dialog.open(ValidateSampleComponent, dialogConfig).afterClosed().subscribe(choice => {
+      if (!choice) {
+        this.messageService.simpleWarnMessage(ERRORS.VALIDATION_FAILED);
+        return;
       }
+
+      this.sampleAPIService.postSample(tagesnummer, assignRack).subscribe({
+        next: (resp) => {
+          const internalNumber: string = resp.body.internal_number;
+
+          this._copyInternalNumber(internalNumber);
+          if (print) {
+            this._printLargeLabel(tagesnummer, internalNumber);
+            this._printSmallLabel(tagesnummer, internalNumber);
+          }
+          this._updateSamples();
+          this._clearFormControls();
+        },
+        error: (err) => {
+          const messages: string[] | undefined = err.error?.tagesnummer;
+
+          if (messages) {
+            const outputMessage = messages.reduce(
+              (acc, cur) => acc + cur + "", ""
+            );
+            this.messageService.simpleWarnMessage(outputMessage);
+            return;
+          }
+          this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
+        }
+      });
     });
   }
 

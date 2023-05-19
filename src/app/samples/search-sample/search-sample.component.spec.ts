@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchSampleComponent } from './search-sample.component';
+import { AppModule } from 'src/app/app.module';
+import { SamplesModule } from '../samples.module';
 
 describe('SearchSampleComponent', () => {
   let component: SearchSampleComponent;
@@ -8,7 +10,8 @@ describe('SearchSampleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchSampleComponent ]
+      declarations: [ SearchSampleComponent ],
+      imports: [SamplesModule, AppModule]
     })
     .compileComponents();
 
