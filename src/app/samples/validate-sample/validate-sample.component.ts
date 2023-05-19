@@ -28,10 +28,6 @@ export class ValidateSampleComponent {
     this.validationFormGroup = fb.group({
       copySampleId: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(10), Validators.maxLength(12)]],
     });
-    if (!data.originalSampleId) {
-      this.dialogRef.close(null);
-      return;
-    }
     this.originalSampleId = data.originalSampleId;
   }
 

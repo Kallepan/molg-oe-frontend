@@ -11,6 +11,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExportComponent } from './create-sample/export/export.component';
 import { ValidateSampleComponent } from './validate-sample/validate-sample.component';
 
+const dialogMock = {
+  close: () => {},
+}
+
 @NgModule({
   declarations: [
     CreateSampleComponent,
@@ -30,7 +34,7 @@ import { ValidateSampleComponent } from './validate-sample/validate-sample.compo
     {provide: MAT_DIALOG_DATA, useValue: {
       originalSampleId: null,
     }},
-    {provide: MatDialogRef, useValue: {}},
+    {provide: MatDialogRef, useValue: dialogMock},
   ]
 })
 export class SamplesModule {
