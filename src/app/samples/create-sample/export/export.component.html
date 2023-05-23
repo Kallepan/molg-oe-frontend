@@ -4,7 +4,7 @@
         <mat-label>Datum zum exportieren auswählen</mat-label>
         <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [formControl]="dateFormControl"
             [min]="minDate" [max]="maxDate">
-        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-hint>TT/MM/JJJJ</mat-hint>
 
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

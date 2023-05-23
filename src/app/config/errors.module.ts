@@ -19,4 +19,5 @@ export class ERRORS {
 
     public static VALIDATION_FAILED = "Die Validation ist fehlgeschlagen.";
     public static INVALID_TAGESNUMMER = "Die Tagesnummer ist ungültig.";
+    public static NO_SAMPLES = "weist keine Proben auf.";
 }

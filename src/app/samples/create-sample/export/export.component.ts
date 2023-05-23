@@ -41,14 +41,13 @@ export class ExportComponent {
       this.messageService.simpleWarnMessage(ERRORS.ERROR_INVALID_FORM);
       return;
     }
-
     const date: Date | null = this.dateFormControl.value;
-    if (!date) return;
 
+    if (!date) return;
     const year  = date.getFullYear().toString();
-    const month = date.getMonth().toString()
+    const month = (date.getMonth() + 1).toString(); // Do not forget to add 1 haha
     const day   = date.getDate().toString();
-    
+
     this.sampleAPIService.requestExportBySample(year, month, day).subscribe({
       next: (resp) => {
         const blob: Blob = resp.body;
@@ -59,10 +58,12 @@ export class ExportComponent {
         a.download = `molg_export_${year}-${month}-${day}.csv`;
         a.click();
         URL.revokeObjectURL(objUrl);
-      },
-      error: (error) => {
-        const message = error.export;
-        this.messageService.simpleWarnMessage(message);
+      }, error: (err) => {
+        if (err.status === 404) {
+         this.messageService.simpleWarnMessage(`${day}.${month}.${year} ${ERRORS.NO_SAMPLES}`);
+         return;
+        }
+        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
       }
     });
 
