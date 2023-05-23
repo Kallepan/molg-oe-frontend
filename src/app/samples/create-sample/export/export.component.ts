@@ -11,6 +11,7 @@ import { SampleAPIService } from '../../sample-api.service';
   styleUrls: ['./export.component.scss']
 })
 export class ExportComponent {
+  exportPath = '\\\\datensilo\\Gruppenordner\\Lab2Mirth\\Gennum';
   dateFormControl: FormControl;
   minDate: Date;
   maxDate: Date;
@@ -69,5 +70,9 @@ export class ExportComponent {
 
   }
 
-  
+  copyPath(event: any) {
+    event.preventDefault();
+    navigator.clipboard.writeText(this.exportPath);
+    this.messageService.goodMessage('Pfad wurde in die Zwischenablage kopiert');
+  }
 }
