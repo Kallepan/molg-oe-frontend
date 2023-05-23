@@ -67,11 +67,15 @@ export class ExportComponent {
         this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
       }
     });
-
   }
 
   copyPath(event: any) {
     event.preventDefault();
+    try {
+      window.open("file:///datensilo/Gruppenordner/Lab2Mirth/Gennum");
+    } catch (e) {
+      //console.log(e);
+    }
     navigator.clipboard.writeText(this.exportPath);
     this.messageService.goodMessage('Pfad wurde in die Zwischenablage kopiert');
   }
