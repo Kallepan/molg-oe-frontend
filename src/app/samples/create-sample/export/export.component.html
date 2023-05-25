@@ -1,13 +1,17 @@
 <div class="container">
     <h1>Proben exportieren</h1>
-    <mat-form-field appearance="outline">
-        <mat-label>Datum zum exportieren auswählen</mat-label>
-        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [formControl]="dateFormControl"
-            [min]="minDate" [max]="maxDate">
-        <mat-hint><small>TT/MM/JJJJ. Der Export kommt hier hin: <a href="#" (click)="copyPath($event)">{{exportPath}}</a></small></mat-hint>
-
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
     <button class="form-button" color="accent" mat-raised-button (click)="submit()">Exportieren</button>
+    <mat-card class="card" *ngIf="showExportInfo">
+        <mat-card-content>
+            <div class="row">
+                <span class="blink-object dot"></span>
+                <p>Zum Exportieren der Proben nach MOLIS die heruntergeladene Datei in den folgenden Pfad kopieren:</p>
+                <span class="blink-object dot"></span>
+            </div>
+            <div class="row">
+                {{exportPath}}
+                <button mat-icon-button (click)="copyPath($event)"><mat-icon>content_copy</mat-icon></button>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

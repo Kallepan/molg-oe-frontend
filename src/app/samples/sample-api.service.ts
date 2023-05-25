@@ -19,6 +19,18 @@ export class SampleAPIService {
   constructor(private http: HttpClient) { }
   printers = CONSTANTS.PRINTERS;
 
+  requestExport(): Observable<HttpResponse<any>> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      observe: 'response' as const,
+      responseType: 'blob' as const,
+    };
+
+    return this.http.post(EXPORT_SAMPLE_API_ENDPOINT, null, httpOptions);
+  }
+
   requestExportBySample(year: string, month: string, day: string): Observable<HttpResponse<any>> {
     const data = {
       year: year,

@@ -1,8 +1,36 @@
-
+.container {
+    .card {
+        margin-top: 10px;
+    }
+}
 mat-form-field {
     width: 100%;
 }
 
 .form-button {
     margin-top: 10px;
+}
+
+.blink-object {
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: darkred;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: baseline;
 }
