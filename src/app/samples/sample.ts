@@ -7,6 +7,7 @@ export interface  Sample {
     archived_at?: string,
     archived_by?: string,
     archived: boolean,
+    dpdl: boolean,
     dummy?: boolean,
 
     

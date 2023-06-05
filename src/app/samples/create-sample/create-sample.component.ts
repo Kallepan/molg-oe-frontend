@@ -135,13 +135,25 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.data = {};
+    const print = this.sampleFormGroup.controls["print"].value;
 
     this.dialog.open(DPDLDialogComponent, dialogConfig).afterClosed().subscribe({
       next: (result) => {
         if (!result) return;
 
-        console.log(result);
+        this.sampleAPIService.postDPDLSample(result).subscribe({
+          next: (resp) => {
+            const internalNumber: string = resp.body.internal_number;
 
+            this._copyInternalNumber(internalNumber);
+            if (print) {
+              this._printLargeLabel(result, internalNumber);
+              this._printSmallLabel(result, internalNumber);
+            }
+          }, error: () => {
+            this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
+          }
+        });
       },
     });
 

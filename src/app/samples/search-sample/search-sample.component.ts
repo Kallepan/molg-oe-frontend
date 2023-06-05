@@ -126,26 +126,4 @@ export class SearchSampleComponent {
 
     this.dialog.open(AdditionalPrintDialogComponent, dialogConfig);
   }
-
-  private _printLargeLabel(tagesnummer: string, internal_number: string) {
-    this.sampleAPIService.printLabel(tagesnummer, internal_number, "largePrinter").subscribe({
-      next: () => {
-
-      },
-      error: () => {
-        this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
-      }
-    });
-  }
-
-  private _printSmallLabel(tagesnummer: string, internal_number: string) {
-    this.sampleAPIService.printLabel(tagesnummer, internal_number, "smallPrinter").subscribe({
-      next: () => {
-
-      },
-      error: () => {
-        this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
-      }
-    });
-  }
 }

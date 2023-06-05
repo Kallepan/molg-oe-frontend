@@ -50,7 +50,6 @@ export class SampleAPIService {
   }
 
   printLabel(tagesnummer: string, internal_number: string, printerType: "largePrinter" | "smallPrinter"): Observable<HttpResponse<any>> {
-
     const data = {
       tagesnummer: tagesnummer,
       internal_number: internal_number,
@@ -94,6 +93,22 @@ export class SampleAPIService {
     };
 
     return this.http.patch(`${SAMPLES_API_ENDPOINT}${tagesnummer}/`, data, httpOptions);
+  }
+
+  postDPDLSample(tagesnummer: string): Observable<HttpResponse<any>> {
+    const data = {
+      tagesnummer: tagesnummer,
+      dpdl: true,
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      observe: 'response' as const
+    };
+
+    return this.http.post(SAMPLES_API_ENDPOINT, data, httpOptions);
   }
 
   postDummySample(): Observable<HttpResponse<any>> {

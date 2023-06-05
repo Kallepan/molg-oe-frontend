@@ -1,15 +1,16 @@
 <div class="container">
+    <h2>DPDL Proben hinzufügen</h2>
     <form class="form" action="submit" [formGroup]="dpdplForm">
         <mat-form-field class="wide-form">
             <mat-label>Tagesnummer</mat-label>
             <input matInput placeholder="491111111102"
-                formControlName="tagesnummer" type="text" maxlength="24" minlength="10">
+                formControlName="tagesnummer" type="text" maxlength="24" minlength="10" autocomplete="off">
             <mat-hint align="start">Tagesnummer eingeben</mat-hint>
         </mat-form-field>
         <mat-form-field class="wide-form">
             <mat-label>Tagesnummer bestätigen</mat-label>
             <input matInput placeholder="491111111102"
-                formControlName="tagesnummerConfirm" type="text" maxlength="24" minlength="10" (keydown.tab)="confirm()" (keydown.enter)="confirm()">
+                formControlName="tagesnummerConfirm" type="text" maxlength="24" minlength="10" (keydown.tab)="confirm()" (keydown.enter)="confirm()" autocomplete="off">
             <mat-hint align="start">Tagesnummer bestätigen</mat-hint>
             <mat-error *ngIf="dpdplForm.hasError('notSame')">Tagesnummern stimmen nicht überein</mat-error>
         </mat-form-field>
