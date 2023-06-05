@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { interval, map, Observable, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -9,6 +9,7 @@ import { PrintSample, Sample } from '../sample';
 import { SampleAPIService } from '../sample-api.service';
 import { AdditionalPrintDialogComponent } from './additional-print-dialog/additional-print-dialog.component';
 import { ValidateSampleComponent } from '../validate-sample/validate-sample.component';
+import { DPDLDialogComponent } from '../dpdldialog/dpdldialog.component';
 
 @Component({
   selector: 'app-create-sample',
@@ -126,6 +127,24 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
         this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
       }
     });
+  }
+
+  createDPDLSample() {
+    if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {};
+
+    this.dialog.open(DPDLDialogComponent, dialogConfig).afterClosed().subscribe({
+      next: (result) => {
+        if (!result) return;
+
+        console.log(result);
+
+      },
+    });
+
   }
 
   createDummySample() {

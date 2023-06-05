@@ -10,6 +10,7 @@ import { AdditionalPrintDialogComponent } from './create-sample/additional-print
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExportComponent } from './create-sample/export/export.component';
 import { ValidateSampleComponent } from './validate-sample/validate-sample.component';
+import { DPDLDialogComponent } from './dpdldialog/dpdldialog.component';
 
 const dialogMock = {
   close: () => {},
@@ -22,7 +23,8 @@ const dialogMock = {
     SearchSampleComponent,
     AdditionalPrintDialogComponent,
     ExportComponent,
-    ValidateSampleComponent
+    ValidateSampleComponent,
+    DPDLDialogComponent
   ],
   imports: [
     CommonModule,

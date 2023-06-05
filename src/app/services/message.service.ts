@@ -51,6 +51,9 @@ export class MessageService {
             case 'required':
               error_message = error_message + `Das Feld darf nicht leer sein. `
               break;
+            case 'notSame':
+              error_message = error_message + `Die beiden Felder muessen gleich sein. `
+              break;
             default:
               error_message = error_message + `Unbekannter Fehler. `
               break;

@@ -32,6 +32,8 @@
 .actions-container {
     margin-top: 10px;
     margin-bottom: 10px;
+    display: inline-flex;
+    gap: 15px;
 }
 
 @keyframes append-animate {
