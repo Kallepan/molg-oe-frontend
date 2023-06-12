@@ -15,6 +15,5 @@ export interface  Sample {
   }
 
 export type PrintSample = {
-  tagesnummer: string,
-  internalNumber: string
+  tagesnummer: string
 } 

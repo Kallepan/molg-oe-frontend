@@ -13,7 +13,6 @@ import { SampleAPIService } from '../../sample-api.service';
 })
 export class AdditionalPrintDialogComponent {
   private _tagesnummer : string;
-  private _internalNumber: string;
   
   constructor(
     public dialogRef: MatDialogRef<AdditionalPrintDialogComponent>,
@@ -21,13 +20,12 @@ export class AdditionalPrintDialogComponent {
     private sampleAPIService: SampleAPIService,
     private messageService: MessageService
   ) {
-    this._internalNumber = data.internalNumber;
     this._tagesnummer = data.tagesnummer;
   }
 
 
   printLargeLabel() {
-    this.sampleAPIService.printLabel(this._tagesnummer, this._internalNumber,"largePrinter").subscribe({
+    this.sampleAPIService.printLabel(this._tagesnummer,"largePrinter").subscribe({
       next: () => {
 
       },
@@ -38,7 +36,7 @@ export class AdditionalPrintDialogComponent {
   }
 
   printSmallLabel() {
-    this.sampleAPIService.printLabel(this._tagesnummer, this._internalNumber, "smallPrinter").subscribe({
+    this.sampleAPIService.printLabel(this._tagesnummer, "smallPrinter").subscribe({
       next: () => {
 
       },

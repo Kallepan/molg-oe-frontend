@@ -49,10 +49,9 @@ export class SampleAPIService {
     return this.http.post(EXPORT_SAMPLE_API_ENDPOINT, data, httpOptions);
   }
 
-  printLabel(tagesnummer: string, internal_number: string, printerType: "largePrinter" | "smallPrinter"): Observable<HttpResponse<any>> {
+  printLabel(tagesnummer: string, printerType: "largePrinter" | "smallPrinter"): Observable<HttpResponse<any>> {
     const data = {
       tagesnummer: tagesnummer,
-      internal_number: internal_number,
       printer_type: printerType,
     };
 
@@ -62,7 +61,6 @@ export class SampleAPIService {
       }),
       observe: 'response' as const
     };
-
 
     return this.http.post(PRINT_LABEL_API_ENDPOINT, data, httpOptions);
   }

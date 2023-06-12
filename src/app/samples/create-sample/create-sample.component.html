@@ -3,7 +3,7 @@
     <form [formGroup]="sampleFormGroup" class="sample-form">
         <mat-form-field appearance="outline">
             <mat-label>Tagesnummer</mat-label>
-            <input matInput placeholder="491111111102" (keydown.Tab)="submit($event)" (keyup.enter)="submit($event)"
+            <input matInput placeholder="491111111102" (keydown.Tab)="createSample($event)" (keyup.enter)="createSample($event)"
                 formControlName="tagesnummer" type="text" maxlength="24" minlength="10">
             <mat-hint align="start">Tagesnummer eingeben und mit Enter/Tab bestätigen</mat-hint>
         </mat-form-field>

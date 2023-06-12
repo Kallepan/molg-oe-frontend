@@ -119,8 +119,7 @@ export class SearchSampleComponent {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = false;
     const data: PrintSample = {
-      tagesnummer: sample.tagesnummer,
-      internalNumber: sample.internal_number
+      tagesnummer: sample.tagesnummer
     };
     dialogConfig.data = data;
 

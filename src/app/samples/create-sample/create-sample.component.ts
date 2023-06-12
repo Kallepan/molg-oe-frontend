@@ -96,8 +96,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = false;
     const data: PrintSample = {
       tagesnummer: tagesnummer,
-      internalNumber: internalNumber
-    };
+   };
     dialogConfig.data = data;
 
     this.dialog.open(AdditionalPrintDialogComponent, dialogConfig);
@@ -107,8 +106,8 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     this.sampleFormGroup.controls["tagesnummer"].reset();
   }
 
-  private _printLargeLabel(tagesnummer: string, internal_number: string) {
-    this.sampleAPIService.printLabel(tagesnummer, internal_number, "largePrinter").subscribe({
+  private _printLargeLabel(tagesnummer: string) {
+    this.sampleAPIService.printLabel(tagesnummer, "largePrinter").subscribe({
       next: () => {
 
       },
@@ -118,8 +117,8 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     });
   }
 
-  private _printSmallLabel(tagesnummer: string, internal_number: string) {
-    this.sampleAPIService.printLabel(tagesnummer, internal_number, "smallPrinter").subscribe({
+  private _printSmallLabel(tagesnummer: string) {
+    this.sampleAPIService.printLabel(tagesnummer, "smallPrinter").subscribe({
       next: () => {
 
       },
@@ -147,8 +146,8 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
             this._copyInternalNumber(internalNumber);
             if (print) {
-              this._printLargeLabel(result, internalNumber);
-              this._printSmallLabel(result, internalNumber);
+              this._printLargeLabel(result);
+              this._printSmallLabel(result);
             }
           }, error: () => {
             this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
@@ -166,7 +165,9 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
     this.sampleAPIService.postDummySample().subscribe({
       next: (resp) => {
-        this._copyInternalNumber(resp.body.internal_number);
+        const internalNumber: string = resp.body.internal_number;
+
+        this._copyInternalNumber(internalNumber);
         this._updateSamples();
       }, error: () => {
         this._updateSamples();
@@ -191,7 +192,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(event: Event) {
+  createSample(event: Event) {
     event.preventDefault();
 
     if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
@@ -226,8 +227,8 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
           this._copyInternalNumber(internalNumber);
           if (print) {
-            this._printLargeLabel(tagesnummer, internalNumber);
-            this._printSmallLabel(tagesnummer, internalNumber);
+            this._printLargeLabel(tagesnummer);
+            this._printSmallLabel(tagesnummer);
           }
           this._updateSamples();
           this._clearFormControls();
