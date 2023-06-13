@@ -3,14 +3,14 @@
     <form [formGroup]="sampleFormGroup" class="sample-form">
         <mat-form-field appearance="outline">
             <mat-label>Tagesnummer</mat-label>
-            <input matInput placeholder="491111111102" (keydown.Tab)="submitTagesnummer($event)" (keyup.enter)="submitTagesnummer($event)"
+            <input matInput placeholder="491111111102" autocomplete="off" (keydown.Tab)="submitTagesnummer($event)" (keyup.enter)="submitTagesnummer($event)"
                 formControlName="tagesnummer" type="text" maxlength="13" minlength="10">
             <mat-hint align="start">Tagesnummer eingeben und mit Enter/Tab bestätigen</mat-hint>
         </mat-form-field>
         <div class="spacer">oder...</div>
         <mat-form-field appearance="outline">
             <mat-label>Gennummer</mat-label>
-            <input matInput placeholder="(003)7-03-2023" (keydown.Tab)="submitInternalNumber($event)" (keyup.enter)="submitInternalNumber($event)" formControlName="internalNumber">
+            <input matInput placeholder="(003)7-03-2023" autocomplete="off" (keydown.Tab)="submitInternalNumber($event)" (keyup.enter)="submitInternalNumber($event)" formControlName="internalNumber">
             <mat-hint align="start">Interne Nummer eingeben und mit Enter/Tab bestätigen</mat-hint>
         </mat-form-field>
     </form>

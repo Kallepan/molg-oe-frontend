@@ -16,7 +16,7 @@
         <mat-form-field class="large-form-field">
             <mat-label>Tagesnummer</mat-label>
             <input matInput placeholder="491111111102" (keydown.Tab)="confirm()" (keyup.enter)="confirm()"
-                formControlName="copySampleId" type="text" maxlength="12" minlength="10">
+                formControlName="copySampleId" type="text" maxlength="12" minlength="10" autocomplete="off">
             <mat-hint align="start">Bitte die gleiche Probe nochmal scannen</mat-hint>
         </mat-form-field>
     </form>
