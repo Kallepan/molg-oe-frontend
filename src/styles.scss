@@ -71,7 +71,7 @@ $md-secondarypalette: (
 
 @include mat.core();
 
-$angular-primary: mat.define-palette($md-primarypalette, 400);
+$angular-primary: mat.define-palette($md-primarypalette, 300);
 $angular-accent: mat.define-palette($md-secondarypalette, 200);
 
 $angular-warn: mat.define-palette(mat.$red-palette);

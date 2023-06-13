@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=v2
+VERSION=v1
 
 export $(grep -v '^#' ../../.env | xargs)
 
