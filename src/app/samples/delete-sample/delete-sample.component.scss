@@ -1,0 +1,37 @@
+@import '../../../variables.scss';
+
+.sample-form {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+.samples-container {
+    margin: auto;
+    margin-top: 10px;
+    max-width: 1500px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+
+
+.sample {
+    transition: filter 300ms ease-in-out;
+    background: rgb(96,147,172);
+    background: $card-background;
+    color: $text-color-light;
+}
+
+mat-card-subtitle {
+    color: $text-color-light;
+}
