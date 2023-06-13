@@ -40,6 +40,7 @@ export class CONSTANTS {
         { routerLink: '/hilfe', disabled: false, displayName: "Hilfe", type: 'Information', primary: true, description: "Erklärung der Webseite." },
         { routerLink: '/proben/search', disabled: false, displayName: 'Suche', type: 'Probensuche', primary: true, description: 'Proben aus dem Archiv raussuchen.' },
         { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Lagerung', primary: true, description: 'Proben archivieren.' },
+        { routerLink: '/proben/delete', disabled: false, displayName: 'Löschen', type: 'Löschen', primary: true, description: "Proben löschen." },
         { routerLink: '/proben', disabled: false, displayName: 'Proben', type: 'Eingang', primary: true, description: "Vergabe von Gennummer." },
     ]
 

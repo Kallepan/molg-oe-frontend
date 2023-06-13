@@ -11,6 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExportComponent } from './create-sample/export/export.component';
 import { ValidateSampleComponent } from './validate-sample/validate-sample.component';
 import { DPDLDialogComponent } from './dpdldialog/dpdldialog.component';
+import { DeleteSampleComponent } from './delete-sample/delete-sample.component';
 
 const dialogMock = {
   close: () => {},
@@ -24,7 +25,8 @@ const dialogMock = {
     AdditionalPrintDialogComponent,
     ExportComponent,
     ValidateSampleComponent,
-    DPDLDialogComponent
+    DPDLDialogComponent,
+    DeleteSampleComponent
   ],
   imports: [
     CommonModule,

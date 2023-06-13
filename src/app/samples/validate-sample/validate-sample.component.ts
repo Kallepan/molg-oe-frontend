@@ -50,14 +50,10 @@ export class ValidateSampleComponent {
   }
 
   getColorEncoding(): Array<ColorEncoding> {
-    if (this.validationFormGroup.invalid) {
-      return [];
-    }
-
     const copySampleId: string = this.validationFormGroup.value.copySampleId;
     const encoding = copySampleId.split('').map((char, index) => {
       if (char === this.originalSampleId[index]) {
-        return { char, color: "#00ff00" };
+        return { char, color: "#008a00" };
       } else {
         return { char, color: "#ff0000" };
       }

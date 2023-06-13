@@ -27,6 +27,23 @@
     }
 }
 
+html, body, app-root, .app-frame {
+    height: 100%;
+    --bg: #FAFAFA;
+    --bg-panel: rgba(255, 255, 255, 1);
+    --primary: #2ba671;
+    --accent: rgba(184, 245, 248, 1);
+    --color-text-grey: #707070;
+    --color-text-black: #FFFFFF;
+    --triangle: transparent linear-gradient(51deg, #E9EDF8 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+    --graph:  rgba(223, 226, 234, 1);
+    --graph-border: 1px solid rgba(223, 226, 234, 1);
+    overflow: hidden;
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+    color: #e0e0e0;
+}
 
 .footer {
     background-color: rgba($color: black, $alpha: 0.8);

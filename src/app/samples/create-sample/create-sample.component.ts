@@ -176,22 +176,6 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteSample(tagesnummer: string) {
-    if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
-
-    if (confirm("Möchten Sie die Probe wirklich löschen?") === false) return;
-
-    this.sampleAPIService.deleteSample(tagesnummer).subscribe({
-      next: () => {
-        this._updateSamples();
-      },
-      error: () => {
-        this._updateSamples();
-        this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
-      }
-    });
-  }
-
   createSample(event: Event) {
     event.preventDefault();
 

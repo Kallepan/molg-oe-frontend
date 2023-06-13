@@ -20,4 +20,6 @@ export class ERRORS {
     public static VALIDATION_FAILED = "Die Validation ist fehlgeschlagen.";
     public static INVALID_TAGESNUMMER = "Die Tagesnummer ist ungültig.";
     public static NO_SAMPLES = "Keine Proben zum Exportieren gefunden.";
+
+    public static ERROR_NOT_DELETED = "Probe wurde NICHT gelöscht";
 }

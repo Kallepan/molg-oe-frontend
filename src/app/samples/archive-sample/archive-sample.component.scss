@@ -36,8 +36,7 @@
 
 .sample {
     transition: filter 300ms ease-in-out;
-    background: rgb(96,147,172);
-    background: $primary-color-gradient;
+    background: $card-background;
     color: $text-color-light;
 }
 
@@ -48,7 +47,6 @@ mat-card-subtitle {
 .new-sample {
     animation: append-animate .3s ease-in;
 }
-
 
 .sample:hover {
     filter: brightness(0.9);
