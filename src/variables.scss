@@ -1,3 +1,18 @@
-$background-color-light: #121212;
-$text-color-light: #fff;
-$card-background: #1f1f1f;
+$text-color-darkmode: #fff;
+$text-color-lightmode: #000;
+
+$card-background-darkmode: #1f1f1f;
+$card-background-lightmode: #fff;
+
+$text-color: $text-color-darkmode;
+$card-background: $card-background-darkmode;
+
+@mixin darkmode {
+    --textColor: #{$text-color-darkmode};
+    --cardBackground: #{$card-background-darkmode};
+}
+
+@mixin lightmode {
+    --textColor: #{$text-color-lightmode};
+    --cardBackground: #{$card-background-lightmode};
+}

@@ -1,5 +1,3 @@
-@import '../../../variables.scss';
-
 .sample-form {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -28,10 +26,4 @@
 .sample {
     transition: filter 300ms ease-in-out;
     background: rgb(96,147,172);
-    background: $card-background;
-    color: $text-color-light;
-}
-
-mat-card-subtitle {
-    color: $text-color-light;
 }

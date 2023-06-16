@@ -1,4 +1,3 @@
-@import 'src/variables.scss';
 .sample-form {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -43,7 +42,6 @@
 
 .sample {
     transition: all 300ms ease-in-out;
-    background: $card-background;
 }
 
 .sample:hover {

@@ -1,5 +1,5 @@
 /* For use in src/lib/core/theming/_palette.scss */
-$md-primarypalette: (
+$md-primary-palette: (
     50 : #e0e0e0,
     100 : #b3b3b3,
     200 : #808080,
@@ -32,7 +32,7 @@ $md-primarypalette: (
     )
 );
 
-$md-secondarypalette: (
+$md-secondary-palette: (
     50 : #ede7f6,
     100 : #d1c4e9,
     200 : #b39ddb,
@@ -71,23 +71,34 @@ $md-secondarypalette: (
 
 @include mat.core();
 
-$angular-primary: mat.define-palette($md-primarypalette, 300);
-$angular-accent: mat.define-palette($md-secondarypalette, 200);
-
+$dark-primary: mat.define-palette($md-primary-palette, 500);
+$dark-accent: mat.define-palette($md-secondary-palette, 500);
 $angular-warn: mat.define-palette(mat.$red-palette);
 
-$angular-default-theme: mat.define-dark-theme(
+$dark-default-theme: mat.define-dark-theme(
   (
     color: (
-      primary: $angular-primary,
-      accent: $angular-accent,
+      primary: $dark-primary,
+      accent: $dark-accent,
       warn: $angular-warn,
     ),
   )
 );
 
-@include mat.all-component-themes($angular-default-theme);
-@import "./variables";
+$light-primary: mat.define-palette($md-primary-palette, 200);
+$light-accent: mat.define-palette($md-secondary-palette, 200);
+$light-default-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $light-primary,
+      accent: $light-accent,
+      warn: $angular-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($dark-default-theme);
+@import "./variables.scss";
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
@@ -97,12 +108,16 @@ body {
   height: 100vh;
 }
 
+body.dark {
+  @include darkmode();
+}
+body.light {
+  @include lightmode();
+}
 
 .container {
   max-width: 1400px;
   margin: auto;
-  margin-top: 20px;
-  color: $text-color-light;
 }
 
 .warn-snackbar {
