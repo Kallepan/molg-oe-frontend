@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { CONSTANTS } from './config/constants';
 import { AuthService } from './login/auth.service';
 
@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   title = CONSTANTS.TITLE;
   version = CONSTANTS.VERSION;
   year = new Date().getFullYear();
+  isDark = true;
 
   primaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => navLink.primary).reverse();
   secondaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => !navLink.primary)
@@ -19,5 +20,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.setupLoginChecker();
+  }
+
+  @HostBinding('class')
+  get themeMode() {
+    return this.isDark ? 'theme-dark' : 'theme-light';
   }
 }
