@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { CONSTANTS } from './config/constants';
 import { AuthService } from './login/auth.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
   primaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => navLink.primary).reverse();
   secondaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => !navLink.primary)
 
-  constructor(private authService: AuthService) {  }
+  constructor(private authService: AuthService, private _overlayContainer: OverlayContainer) {  }
 
   ngOnInit(): void {
     this.authService.setupLoginChecker();
@@ -25,5 +26,17 @@ export class AppComponent implements OnInit {
   @HostBinding('class')
   get themeMode() {
     return this.isDark ? '' : 'theme-light';
+  }
+
+  toggleTheme() {
+    if (this.isDark) {
+      this._overlayContainer.getContainerElement().classList.remove('theme-dark');
+      this._overlayContainer.getContainerElement().classList.add('theme-light');
+    }
+    else {
+      this._overlayContainer.getContainerElement().classList.remove('theme-light');
+      this._overlayContainer.getContainerElement().classList.add('theme-dark');
+    }
+    this.isDark = !this.isDark;
   }
 }
