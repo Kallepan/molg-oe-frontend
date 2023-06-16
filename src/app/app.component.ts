@@ -24,6 +24,6 @@ export class AppComponent implements OnInit {
 
   @HostBinding('class')
   get themeMode() {
-    return this.isDark ? 'theme-dark' : 'theme-light';
+    return this.isDark ? '' : 'theme-light';
   }
 }

@@ -9,7 +9,7 @@
       [disabled]="navLink.disabled">{{navLink.displayName}}<br><small>{{navLink.type}}</small></button>
   </div>
   <span class="small-spacer"></span>
-  <mat-slide-toggle [(ngModel)]="isDark">Dark Mode</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="isDark" class="header-link" [matTooltip]="isDark ? 'Dark mode off': 'Dark mode on'"></mat-slide-toggle>
   <span class="wide-spacer"></span>
   <app-login></app-login>
 </mat-toolbar>
