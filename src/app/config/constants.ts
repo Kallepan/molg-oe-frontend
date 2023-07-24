@@ -20,7 +20,7 @@ export type Printer = {
 };
 export class CONSTANTS {
     public static TITLE = "MOLG OrderEntry"
-    public static VERSION = "1.1.1"
+    public static VERSION = "1.1.2"
 
     public static GLOBAL_API_ENDPOINT = environment.apiUrl;
     public static AUTH_API_ENDPOINT = environment.authUrl;
@@ -38,10 +38,10 @@ export class CONSTANTS {
 
     public static NAV_LINKS: navLink[] = [
         { routerLink: '/hilfe', disabled: false, displayName: "Hilfe", type: 'Information', primary: true, description: "Erklärung der Webseite." },
-        { routerLink: '/proben/search', disabled: false, displayName: 'Suche', type: 'Probensuche', primary: true, description: 'Proben aus dem Archiv raussuchen.' },
-        { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Lagerung', primary: true, description: 'Proben archivieren.' },
-        { routerLink: '/proben/delete', disabled: false, displayName: 'Löschen', type: 'Löschen', primary: true, description: "Proben löschen." },
-        { routerLink: '/proben', disabled: false, displayName: 'Proben', type: 'Eingang', primary: true, description: "Vergabe von Gennummer." },
+        { routerLink: '/proben/search', disabled: false, displayName: 'Suche', type: 'Proben', primary: true, description: 'Proben aus dem Archiv raussuchen.' },
+        { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Proben', primary: true, description: 'Proben archivieren.' },
+        { routerLink: '/proben/delete', disabled: false, displayName: 'Löschen', type: 'Proben', primary: true, description: "Proben löschen." },
+        { routerLink: '/proben', disabled: false, displayName: 'Eingang', type: 'Proben', primary: true, description: "Vergabe von Gennummer." },
     ]
 
 
