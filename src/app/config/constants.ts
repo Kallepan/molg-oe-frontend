@@ -20,7 +20,7 @@ export type Printer = {
 };
 export class CONSTANTS {
     public static TITLE = "MOLG OrderEntry"
-    public static VERSION = "1.1.2"
+    public static VERSION = "1.1.3"
 
     public static GLOBAL_API_ENDPOINT = environment.apiUrl;
     public static AUTH_API_ENDPOINT = environment.authUrl;

@@ -12,7 +12,7 @@
     </form>
     <div class="actions-container">
         <button mat-raised-button color="accent" (click)="createDummySample()">Pränatalprobe anlegen</button>
-        <button mat-raised-button color="accent" (click)="createDPDLSample()">DPDLprobe anlegen</button>
+        <!-- button mat-raised-button color="accent" (click)="createDPDLSample()">DPDLprobe anlegen</button -->
     </div>
 
     <div *ngIf="(samples$ | async) as samples" class="samples-container">
