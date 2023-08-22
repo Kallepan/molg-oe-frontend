@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=v2
+VERSION=v1
 
 export $(grep -v '^#' ../../.env | xargs)
 
@@ -10,7 +10,7 @@ cd ../../.
 docker build -t kallepan/oe-frontend:${VERSION} .
 docker push kallepan/oe-frontend:${VERSION}
 
-cd infrastructure/base
+cd infrastructure/prod
 kubectl --kubeconfig $KUBECONFIG kustomize . > run.yaml
 sed -i "s/IMAGE_TAG/${VERSION}/g" run.yaml
 kubectl --kubeconfig $KUBECONFIG apply -f run.yaml
