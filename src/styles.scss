@@ -157,16 +157,20 @@ body {
   height: 100vh;
 }
 @include mat.all-component-themes($dark-default-theme);
+.theme-dark {
+  --card-color1: #7e58c2;
+  --card-color2: #5f34b0;
+  --card-color3: #542ca7;
 
+  --text-color: #ffffff;
+}
 .theme-light {
   @include mat.all-component-colors($light-default-theme);
-  mat-card {
-    background-color: #093365;
-    color: #fff;
-  }
-  .mat-mdc-card-subtitle {
-    color: #d1d1d1;
-  }
+  --card-color1: #2e527c;
+  --card-color2: #093365;
+  --card-color3: #082e5d;
+
+  --text-color: #ffffff;
 }
 
 .container {
@@ -184,4 +188,7 @@ body {
   --mdc-snackbar-container-color: #313131;
   --mdc-snackbar-supporting-text-color: white;
   --mat-mdc-snack-bar-button-color: white;
+}
+.is-active {
+  filter: opacity(0.5);
 }

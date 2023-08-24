@@ -7,5 +7,7 @@ import { CONSTANTS } from '../config/constants';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  navLinks = CONSTANTS.NAV_LINKS.reverse();
+  primaryNavLinks = CONSTANTS.NAV_LINKS.filter(link => link.primary);
+  secondaryNavLinks = CONSTANTS.NAV_LINKS.filter(link => !link.primary);
+
 }

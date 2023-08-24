@@ -1,19 +1,28 @@
-<div class="header">
-    <h1>Apps</h1>
-    <p>Zum Navigieren die obere Leiste nutzen oder auf die Karten klicken.</p>
-</div>
-<div>
-    <div class="card-container">
-        <mat-card *ngFor="let navLink of navLinks" class="card big-card" [routerLink]="navLink.routerLink">
+<div class="center">
+    <div class="container">
+        <mat-card *ngFor="let navLink of primaryNavLinks" class="card" [routerLink]="navLink.routerLink">
+            <mat-card-content>
+                {{navLink.description}}
+            </mat-card-content>
+            <mat-divider></mat-divider>
             <mat-card-header>
                 <mat-card-title>
                     <h3>{{navLink.displayName}} - {{navLink.type}}</h3>
                 </mat-card-title>
             </mat-card-header>
-            <mat-divider></mat-divider>
-            <mat-card-content class="card-content">
+        </mat-card>
+    </div>
+    <div class="container">
+        <mat-card *ngFor="let navLink of secondaryNavLinks" class="card" [routerLink]="navLink.routerLink">
+            <mat-card-content>
                 {{navLink.description}}
             </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-header>
+                <mat-card-title>
+                    <h3>{{navLink.displayName}} - {{navLink.type}}</h3>
+                </mat-card-title>
+            </mat-card-header>
         </mat-card>
     </div>
 </div>

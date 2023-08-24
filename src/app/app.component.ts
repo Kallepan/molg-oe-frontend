@@ -12,31 +12,46 @@ export class AppComponent implements OnInit {
   title = CONSTANTS.TITLE;
   version = CONSTANTS.VERSION;
   year = new Date().getFullYear();
-  isDark = true;
+  private _isDark: boolean;
 
   primaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => navLink.primary).reverse();
   secondaryNavLinks = CONSTANTS.NAV_LINKS.filter(navLink => !navLink.primary)
 
-  constructor(private authService: AuthService, private _overlayContainer: OverlayContainer) {  }
-
-  ngOnInit(): void {
-    this.authService.setupLoginChecker();
-  }
-
-  @HostBinding('class')
-  get themeMode() {
-    return this.isDark ? '' : 'theme-light';
-  }
-
-  toggleTheme() {
-    if (this.isDark) {
-      this._overlayContainer.getContainerElement().classList.remove('theme-dark');
-      this._overlayContainer.getContainerElement().classList.add('theme-light');
+  constructor(private authService: AuthService,
+    private _overlayContainer: OverlayContainer,
+    ) {
+      // Check if dark mode is enabled in localStorage
+      localStorage.getItem('darkMode') === 'true' ? this._isDark = true : this._isDark = false;
     }
-    else {
-      this._overlayContainer.getContainerElement().classList.remove('theme-light');
-      this._overlayContainer.getContainerElement().classList.add('theme-dark');
+  
+    ngOnInit() {
+      this.authService.setupLoginChecker();
     }
-    this.isDark = !this.isDark;
-  }
+  
+    @HostBinding('class')
+    get themeMode() {
+      return this._isDark ? 'theme-dark' : 'theme-light';
+    }
+  
+    get isDark() {
+      return this._isDark;
+    }
+  
+    toggleTheme() {
+      if (this._isDark) {
+        this._overlayContainer.getContainerElement().classList.remove('theme-dark');
+        this._overlayContainer.getContainerElement().classList.add('theme-light');
+  
+        // Save theme preference to localStorage
+        localStorage.setItem('darkMode', 'false');
+      }
+      else {
+        this._overlayContainer.getContainerElement().classList.remove('theme-light');
+        this._overlayContainer.getContainerElement().classList.add('theme-dark');
+        // Save theme preference to localStorage
+        localStorage.setItem('darkMode', 'true');
+      }
+  
+      this._isDark = !this._isDark;
+    }
 }
