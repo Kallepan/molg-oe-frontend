@@ -38,11 +38,11 @@ export class ExportComponent {
   submit() {
     if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
 
-    // Check if the current time is earlier than 15:00, if so show warning and return
+    // Check if the current time is earlier than 14:00 o clock, if so show warning and return
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
-    if (currentHour < 15) {
-      this.messageService.simpleWarnMessage('Export kann erst ab 15:00 Uhr durchgeführt werden');
+    if (currentHour < 14) {
+      this.messageService.simpleWarnMessage('Export kann erst ab 14:00 Uhr durchgeführt werden');
       return;
     }
 
