@@ -13,6 +13,7 @@ import { ValidateSampleComponent } from './validate-sample/validate-sample.compo
 import { DPDLDialogComponent } from './dpdldialog/dpdldialog.component';
 import { DeleteSampleComponent } from './delete-sample/delete-sample.component';
 import { SharedModule } from '../shared/shared.module';
+import { SamplesTableComponent } from './create-sample/samples-table/samples-table.component';
 
 const dialogMock = {
   close: () => {},
@@ -27,7 +28,8 @@ const dialogMock = {
     ExportComponent,
     ValidateSampleComponent,
     DPDLDialogComponent,
-    DeleteSampleComponent
+    DeleteSampleComponent,
+    SamplesTableComponent
   ],
   imports: [
     CommonModule,

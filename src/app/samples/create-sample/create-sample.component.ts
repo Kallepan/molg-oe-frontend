@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { map, Observable, Subject } from 'rxjs';
@@ -15,6 +15,7 @@ import { DPDLDialogComponent } from '../dpdldialog/dpdldialog.component';
   selector: 'app-create-sample',
   templateUrl: './create-sample.component.html',
   styleUrls: ['./create-sample.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CreateSampleComponent implements OnInit, OnDestroy {
   sampleFormGroup: FormGroup;
@@ -27,7 +28,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
   samples$: Observable<Sample[]> = this._samples$.asObservable().pipe(
     map(samples => {
       samples.forEach(sample => {
-        sample.displaySampleId = sample.tagesnummer.slice(0, 2) + " " + sample.tagesnummer.slice(2, 6) + " " + sample.tagesnummer.slice(6, 10);
+        sample.displaySampleId = sample.tagesnummer.slice(0, 4) + " " + sample.tagesnummer.slice(4, 10);
       });
 
       return samples;
@@ -80,11 +81,13 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`);
   }
 
-  onSampleClick(tagesnummer: string, internalNumber: string) {
+  onSampleClick(sample:Sample) {
     if (!window.isSecureContext) {
       this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.");
       return;
     }
+    const internalNumber = sample.internal_number;
+    const tagesnummer = sample.tagesnummer;
 
     navigator.clipboard.writeText(internalNumber);
     this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`);
@@ -108,9 +111,6 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
   private _printLargeLabel(tagesnummer: string) {
     this.sampleAPIService.printLabel(tagesnummer, "largePrinter").subscribe({
-      next: () => {
-
-      },
       error: () => {
         this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
       }
@@ -119,9 +119,6 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
 
   private _printSmallLabel(tagesnummer: string) {
     this.sampleAPIService.printLabel(tagesnummer, "smallPrinter").subscribe({
-      next: () => {
-
-      },
       error: () => {
         this.messageService.simpleWarnMessage(ERRORS.ERROR_NO_PRINT);
       }

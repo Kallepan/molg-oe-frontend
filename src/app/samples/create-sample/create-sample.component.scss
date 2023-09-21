@@ -16,45 +16,9 @@
 
 }
 
-.samples-container {
-    margin: auto;
-    margin-top: 10px;
-    max-width: 1500px;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
-    column-gap: 20px;
-    row-gap: 20px;
-}
-
 .actions-container {
     margin-top: 10px;
     margin-bottom: 10px;
     display: inline-flex;
     gap: 15px;
 }
-
-@keyframes append-animate {
-    from {
-        transform: translateX(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0px);
-        opacity: 1;
-    }
-}
-
-.new-sample {
-    animation: append-animate 300ms ease-in;
-}
-
-.sample {
-    transition: all 300ms ease-in-out;
-}
-
-.sample:hover {
-    transform: scale(1.1);
-    filter: brightness(0.9);
-}
-  
