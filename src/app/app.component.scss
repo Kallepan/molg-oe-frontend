@@ -25,9 +25,9 @@
     }
 }
 .app-frame {
-    height: 100%;
     margin: 0;
     overflow: hidden;
+    min-height: 100%;
 }
 .footer {
     background-color: rgba($color: black, $alpha: 0.8);

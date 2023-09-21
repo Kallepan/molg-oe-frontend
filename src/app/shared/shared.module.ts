@@ -7,7 +7,7 @@ import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,

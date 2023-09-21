@@ -1,6 +1,24 @@
 .container {
-    .card {
-        margin-top: 10px;
+    .action {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+
+        .banner {
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
     }
 }
 mat-form-field {
