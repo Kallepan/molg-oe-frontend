@@ -12,6 +12,7 @@ import { ExportComponent } from './create-sample/export/export.component';
 import { ValidateSampleComponent } from './validate-sample/validate-sample.component';
 import { DPDLDialogComponent } from './dpdldialog/dpdldialog.component';
 import { DeleteSampleComponent } from './delete-sample/delete-sample.component';
+import { SharedModule } from '../shared/shared.module';
 
 const dialogMock = {
   close: () => {},
@@ -33,6 +34,7 @@ const dialogMock = {
     ReactiveFormsModule,
     MaterialModule,
     SampleRoutingModule,
+    SharedModule,
   ],
   providers: [
     {provide: MAT_DIALOG_DATA, useValue: {

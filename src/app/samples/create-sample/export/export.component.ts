@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { SampleAPIService } from '../../sample-api.service';
 import { timestamp } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-export',
@@ -29,23 +31,14 @@ export class ExportComponent {
   constructor(
     private sampleAPIService: SampleAPIService,
     private authService: AuthService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private _dialog: MatDialog) {
     const currentDate = new Date();
     this.maxDate = currentDate;
     this.minDate = new Date(currentDate.getFullYear() - 1, 0, 1);
   }
 
-  submit() {
-    if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
-
-    // Check if the current time is earlier than 14:00 o clock, if so show warning and return
-    const currentDate = new Date();
-    const currentHour = currentDate.getHours();
-    if (currentHour < 14) {
-      this.messageService.simpleWarnMessage('Export kann erst ab 14:00 Uhr durchgeführt werden');
-      return;
-    }
-
+  private _requestExport() {
     this.sampleAPIService.requestExport().subscribe({
       next: (resp) => {
         // Get timestamp for file name
@@ -60,7 +53,7 @@ export class ExportComponent {
         const blob: Blob = resp.body;
         const a = document.createElement('a');
         const objUrl = URL.createObjectURL(blob);
-        
+
         a.href = objUrl;
         a.download = `molg_export_${year}-${month}-${day}_${hour}-${minute}-${second}.csv`;
         a.click();
@@ -75,7 +68,7 @@ export class ExportComponent {
       }
     });
 
-    
+
     // Not needed anymore, but I'll leave it here for now
     // const date: Date | null = this.dateFormControl.value;
 
@@ -102,6 +95,30 @@ export class ExportComponent {
     //     this.messageService.simpleWarnMessage(ERRORS.ERROR_API);
     //   }
     // });
+  }
+
+  submit() {
+    if (!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
+
+    // Check if the current time is earlier than 14:00 o clock, if so show warning and return
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    if (!(currentHour < 14)) {
+      this._requestExport();
+      return;
+    }
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      title: 'Warnung',
+      message: 'Es ist noch vor 14:00 Uhr, sind Sie sicher, dass Sie die Daten exportieren möchten?'
+    };
+    this._dialog.open(ConfirmDialogComponent, dialogConfig).afterClosed().subscribe({
+      next: (result) => {
+        if (result) this._requestExport();
+      }
+    })
   }
 
   copyPath(event: any) {
