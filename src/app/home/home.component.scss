@@ -18,7 +18,6 @@
         height: 150px;
         transform: rotate3d(1, -0.35, 1, 30deg);
         transition: transform 300ms;
-        color: var(--text-color);
 
         &::after {
             content: '';

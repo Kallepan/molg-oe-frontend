@@ -1,12 +1,12 @@
 <div class="center">
     <div class="container">
         <mat-card *ngFor="let navLink of primaryNavLinks" class="card" [routerLink]="navLink.routerLink">
-            <mat-card-content>
+            <mat-card-content style="color: white;">
                 {{navLink.description}}
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-header>
-                <mat-card-title>
+                <mat-card-title style="color: white;">
                     <h3>{{navLink.displayName}} - {{navLink.type}}</h3>
                 </mat-card-title>
             </mat-card-header>
@@ -14,12 +14,12 @@
     </div>
     <div class="container">
         <mat-card *ngFor="let navLink of secondaryNavLinks" class="card" [routerLink]="navLink.routerLink">
-            <mat-card-content>
+            <mat-card-content style="color: white;">
                 {{navLink.description}}
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-header>
-                <mat-card-title>
+                <mat-card-title style="color: white;">
                     <h3>{{navLink.displayName}} - {{navLink.type}}</h3>
                 </mat-card-title>
             </mat-card-header>
