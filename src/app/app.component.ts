@@ -26,6 +26,8 @@ export class AppComponent implements OnInit {
   
     ngOnInit() {
       this.authService.setupLoginChecker();
+
+      this._overlayContainer.getContainerElement().classList.add(this.themeMode);
     }
   
     @HostBinding('class')
