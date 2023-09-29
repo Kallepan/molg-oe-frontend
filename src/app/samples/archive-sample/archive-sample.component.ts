@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { interval, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { Sample } from '../sample';
 import { SampleAPIService } from '../sample-api.service';
+import { ColumnsSchema } from 'src/app/shared/samples-table/samples-table.component';
 
 @Component({
   selector: 'app-archive-sample',
@@ -22,6 +23,13 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
   samples$: Observable<Sample[]> = this._samples$.asObservable();
   
   interval: any | undefined;
+  displayedColumns = [
+    'displaySampleId',
+    'internalID',
+    'created_at',
+    'created_by',
+    'position',
+  ];
 
   constructor(
     private authService: AuthService,
@@ -48,6 +56,7 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
         const samples: Sample[] = resp.body.results;
         const formattedSamples = samples.map(sample => {
           sample.archived = sample.archived_at != "NA";
+          sample.displaySampleId = sample.tagesnummer.slice(0, 4) + " " + sample.tagesnummer.slice(4, 10);  
           return sample;
         });
         

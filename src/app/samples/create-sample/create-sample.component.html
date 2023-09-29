@@ -16,7 +16,8 @@
         <!-- button mat-raised-button color="accent" (click)="createDPDLSample()">DPDLprobe anlegen</button -->
     </div>
 
-    <app-samples-table  *ngIf="(samples$ | async) as samples" [samples]="samples" (onSampleClick)="onSampleClick($event)"></app-samples-table>
+    <app-samples-table *ngIf="(samples$ | async) as samples" [samples]="samples" [displayedColumns]="displayedColumns" (onSampleClick)="onSampleClick($event)"></app-samples-table>
+    <br>
     <br>
     <br>
 </div>

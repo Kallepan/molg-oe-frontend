@@ -4,7 +4,7 @@
         <input matInput type="text" autocomplete="off" placeholder="Tagesnummer..." [formControl]="searchControl">
         <mat-hint><small>Filtert alle Spalten und Zeilen der unteren Tabelle</small></mat-hint>
     </mat-form-field>
-    <table mat-table [dataSource]="dataSource" class="table-container">
+    <table mat-table [dataSource]="dataSource" class="table-container" @rowsAnimation>
         <ng-container [matColumnDef]="col.columnDef" *ngFor="let col of columnsSchema">
             <th mat-header-cell *matHeaderCellDef> {{col.header}} </th>
             <td mat-cell *matCellDef="let element">
@@ -19,6 +19,9 @@
                         <div [ngStyle]="{'color': element.color, 'font-weight': 'bold'}">
                             {{col.cell!(element)}}
                         </div>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'created_by'">
+                        {{col.cell!(element)|titlecase}}
                     </ng-container>
                     <ng-container *ngSwitchDefault>
                         {{col.cell!(element)}}

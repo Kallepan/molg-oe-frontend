@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { map, Observable, Subject } from 'rxjs';
@@ -10,6 +10,7 @@ import { SampleAPIService } from '../sample-api.service';
 import { AdditionalPrintDialogComponent } from './additional-print-dialog/additional-print-dialog.component';
 import { ValidateSampleComponent } from '../validate-sample/validate-sample.component';
 import { DPDLDialogComponent } from '../dpdldialog/dpdldialog.component';
+import { ColumnsSchema } from 'src/app/shared/samples-table/samples-table.component';
 
 @Component({
   selector: 'app-create-sample',
@@ -23,6 +24,16 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
   isError = false;
 
   noOfSamplesToDisplay = 12;
+
+  displayedColumns = [
+    'displaySampleId',
+    'internalID',
+    'created_at',
+    'created_by',
+    'position',
+    'actions',
+  ];
+
 
   private _samples$: Subject<Sample[]> = new Subject<Sample[]>();
   samples$: Observable<Sample[]> = this._samples$.asObservable().pipe(
@@ -81,7 +92,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     this.messageService.goodMessage(`${internalNumber} wurde ins Clipboard kopiert.`);
   }
 
-  onSampleClick(sample:Sample) {
+  onSampleClick(sample: Sample) {
     if (!window.isSecureContext) {
       this.messageService.simpleWarnMessage("Kopieren ins Clipboard ist aufgrund der unsicheren Umgebung abgeschaltet.");
       return;
@@ -99,7 +110,7 @@ export class CreateSampleComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = false;
     const data: PrintSample = {
       tagesnummer: tagesnummer,
-   };
+    };
     dialogConfig.data = data;
 
     this.dialog.open(AdditionalPrintDialogComponent, dialogConfig);

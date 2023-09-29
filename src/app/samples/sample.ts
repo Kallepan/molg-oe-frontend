@@ -8,9 +8,8 @@ export interface  Sample {
     archived_by?: string,
     archived: boolean,
     dpdl: boolean,
+     
     dummy?: boolean,
-
-    
     displaySampleId?: string,
   }
 

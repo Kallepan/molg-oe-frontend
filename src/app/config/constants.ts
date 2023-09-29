@@ -39,9 +39,9 @@ export class CONSTANTS {
     public static NAV_LINKS: navLink[] = [
         { routerLink: '/hilfe', disabled: false, displayName: "Hilfe", type: 'Information', primary: false, description: "Erklärung der Webseite." },
         { routerLink: '/proben/search', disabled: false, displayName: 'Suche', type: 'Proben', primary: true, description: 'Proben aus dem Archiv raussuchen.' },
-        { routerLink: '/proben/archiv', disabled: false, displayName: 'Archiv', type: 'Proben', primary: true, description: 'Proben archivieren.' },
+        { routerLink: '/proben/archive', disabled: false, displayName: 'Archiv', type: 'Proben', primary: true, description: 'Proben archivieren.' },
         { routerLink: '/proben/delete', disabled: false, displayName: 'Löschen', type: 'Proben', primary: true, description: "Proben löschen." },
-        { routerLink: '/proben', disabled: false, displayName: 'Eingang', type: 'Proben', primary: true, description: "Vergabe von Gennummer." },
+        { routerLink: '/proben/create', disabled: false, displayName: 'Eingang', type: 'Proben', primary: true, description: "Vergabe von Gennummer." },
     ]
 
 
