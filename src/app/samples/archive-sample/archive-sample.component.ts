@@ -31,6 +31,8 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
     'position',
   ];
 
+  archivedSample: boolean = false;
+
   constructor(
     private authService: AuthService,
     private messageService: MessageService,
@@ -83,6 +85,11 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
       next: (resp) => {
         this._updateSamples();
         this._clearFormControls();
+
+        this.archivedSample = true;
+        setTimeout(() => {
+          this.archivedSample = false;
+        }, 3000);
       },
       error: (err) => {
         if (err.status === 404) {
