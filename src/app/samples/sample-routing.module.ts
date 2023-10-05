@@ -4,12 +4,13 @@ import { ArchiveSampleComponent } from './archive-sample/archive-sample.componen
 import { CreateSampleComponent } from './create-sample/create-sample.component';
 import { SearchSampleComponent } from './search-sample/search-sample.component';
 import { DeleteSampleComponent } from './delete-sample/delete-sample.component';
+import { authGuard } from '../auth-guard';
 
 const routes: Routes = [
-  {path: 'create', component: CreateSampleComponent, title: 'Probe anlegen'},
-  {path: 'archive', component: ArchiveSampleComponent, title: 'Probe archivieren'},
-  {path: 'search', component: SearchSampleComponent, title: 'Probe suchen'},
-  {path: 'delete', component: DeleteSampleComponent, title: 'Probe löschen'},
+  {path: 'create', component: CreateSampleComponent, title: 'Probe anlegen', canActivate: [authGuard]},
+  {path: 'archive', component: ArchiveSampleComponent, title: 'Probe archivieren', canActivate: [authGuard]},
+  {path: 'search', component: SearchSampleComponent, title: 'Probe suchen', canActivate: []},
+  {path: 'delete', component: DeleteSampleComponent, title: 'Probe löschen', canActivate: [authGuard]},
 ];
 
 @NgModule({
