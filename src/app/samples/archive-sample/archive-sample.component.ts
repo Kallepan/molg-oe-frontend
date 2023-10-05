@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { ERRORS } from 'src/app/config/errors.module';
 import { AuthService } from 'src/app/login/auth.service';
 import { MessageService } from 'src/app/services/message.service';
@@ -18,6 +18,19 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
 
   noOfSamplesToDisplay = 36;
   isError = false;
+
+  private _timerSubject = new Subject<void>();
+  private _timerSubscription: any | undefined;
+  private _setupTimer() {
+    this._timerSubscription = this._timerSubject.pipe(
+      debounceTime(2500),
+      distinctUntilChanged(),
+      switchMap(() => {
+        this.archivedSample = false;
+        return new Observable<void>();
+      }),
+    ).subscribe();
+  }
 
   private _samples$: Subject<Sample[]> = new Subject<Sample[]>();
   samples$: Observable<Sample[]> = this._samples$.asObservable();
@@ -87,9 +100,7 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
         this._clearFormControls();
 
         this.archivedSample = true;
-        setTimeout(() => {
-          this.archivedSample = false;
-        }, 3000);
+        this._timerSubject.next();
       },
       error: (err) => {
         if (err.status === 404) {
@@ -115,11 +126,15 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
     this.interval = setInterval(() => {
       this._updateSamples();
     }, 10000);
+
+    this._setupTimer();
   }
 
   ngOnDestroy() {
     if (this.interval) {
       clearInterval(this.interval);
     }
+
+    this._timerSubscription?.unsubscribe();
   }
 }
