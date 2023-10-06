@@ -24,7 +24,6 @@ export class ArchiveSampleComponent implements OnInit, OnDestroy {
   private _setupTimer() {
     this._timerSubscription = this._timerSubject.pipe(
       debounceTime(2500),
-      distinctUntilChanged(),
       switchMap(() => {
         this.archivedSample = false;
         return new Observable<void>();

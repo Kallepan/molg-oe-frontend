@@ -57,9 +57,6 @@ export class SearchSampleComponent {
   submitTagesnummer(event: Event) {
     event.preventDefault();
 
-    if(!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
-
-
     if (!this.sampleFormGroup.valid) {
       this.messageService.handleFormError(this.sampleFormGroup);
       return;
@@ -84,9 +81,7 @@ export class SearchSampleComponent {
 
   submitInternalNumber(event: Event ) {
     event.preventDefault();
-
-    if(!this.authService.checkLoginWithDisplayMessage(ERRORS.ERROR_LOGIN)) return;
-
+    
     if (!this.sampleFormGroup.valid) {
       this.messageService.handleFormError(this.sampleFormGroup);
       return;
