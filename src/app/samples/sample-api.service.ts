@@ -65,6 +65,22 @@ export class SampleAPIService {
     return this.http.post(PRINT_LABEL_API_ENDPOINT, data, httpOptions);
   }
 
+  dearchiveSample(tagesnummer: string): Observable<HttpResponse<any>> {
+    tagesnummer = tagesnummer.substring(0, TAGESNUMMER_MAX_LENGTH)
+    const data = {
+      dearchive: true,
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      observe: 'response' as const
+    };
+
+    return this.http.patch(`${SAMPLES_API_ENDPOINT}${tagesnummer}/`, data, httpOptions);
+  }
+
   deleteSample(tagesnummer: string): Observable<HttpResponse<any>> {
     tagesnummer = tagesnummer.substring(0, TAGESNUMMER_MAX_LENGTH)
     const httpOptions = {

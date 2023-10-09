@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Probe(n) aus dem Archiv entfernen</h1>
+    <form [formGroup]="sampleFormGroup" class="sample-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Tagesnummer</mat-label>
+            <input matInput placeholder="491111111102" (keydown.Tab)="onSubmit($event)" (keyup.enter)="onSubmit($event)"
+                formControlName="sampleId" type="text" maxlength="13" minlength="10" autocomplete="off">
+            <mat-hint align="start">Tagesnummer eingeben und mit Enter/Tab bestätigen</mat-hint>
+        </mat-form-field>
+    </form>
+
+    <div *ngIf="dearchivedSamples$ | async as dearchivedSamples">
+        <h2>Liste gelöschter Proben</h2>
+        <mat-list>
+            <mat-list-item *ngFor="let deletedSample of dearchivedSamples">
+                <mat-icon matListItemIcon>delete_forever</mat-icon>
+                <div matListItemTitle>{{deletedSample}}</div>
+                <div matListItemLine>Der Rackplatz sollte nun leer sein</div>
+            </mat-list-item>
+        </mat-list>
+    </div>
+    <br />
+    <br />
+    <br />
+</div>

@@ -15,6 +15,7 @@ import { DeleteSampleComponent } from './delete-sample/delete-sample.component';
 import { SharedModule } from '../shared/shared.module';
 import { SamplesTableModule } from '../shared/samples-table/samples-table.component';
 import { ConfettiComponent } from './confetti/confetti.component';
+import { DearchiveSampleComponent } from './dearchive-sample/dearchive-sample.component';
 
 const dialogMock = {
   close: () => {},
@@ -30,7 +31,8 @@ const dialogMock = {
     ValidateSampleComponent,
     DPDLDialogComponent,
     DeleteSampleComponent,
-    ConfettiComponent
+    ConfettiComponent,
+    DearchiveSampleComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,24 @@
+.sample-form {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    white-space: nowrap;
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    .checkbox {
+        margin-bottom: 15px;
+    }
+
+}
+
+.actions-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-flex;
+    gap: 15px;
+}
